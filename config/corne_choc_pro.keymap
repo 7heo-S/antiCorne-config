@@ -7,7 +7,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <behaviors/unicode.dtsi>
-#include <zmk-unicode/keys/fr.h>
+#include <zmk-unicode/keys-extra.h>  // All glyphs except CJK
 #include <zmk-helpers/helper.h>
 
 / {
