@@ -6,12 +6,38 @@
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <behaviors/unicode.dtsi>
+#include <zmk-unicode/keys/fr.h>
+#include <zmk-helpers/helper.h>
 
 / {
     chosen { zmk,physical-layout = &default_layout; };
 };
 
+&uc {
+  default-mode = <UC_MODE_LINUX>;  // Default to Linux input system
+  linux-key = <INSERT>;         // Overwrite Linux compose key
+};
+
+
+// tap: comma | shift + tap: semicolon 
+ZMK_BEHAVIOR(COMMA_OPT, mod_morph,
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+    bindings = <&kp COMMA>, <&kp SEMICOLON>;
+)
+// tap: dot | shift + tap: colon 
+ZMK_BEHAVIOR(DOT_OPT, mod_morph,
+    bindings = <&kp DOT>, <&kp COLON>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+// tap: apostrophe | shift + tap: qmark
+ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
+    bindings = <&kp APOS>, <&kp QMARK>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
 / {
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -19,19 +45,17 @@
             display-name = "QWERTY";
 
             // --------------------------------------------------------------------------------
-            // |  TAB |  Q  |  W  |  E  |  R  |  T  |  MUTE |  PP   |  Y  |  U   |  I  |  O  |  P  | BSPC |
-            // | CTRL |  A  |  S  |  D  |  F  |  G  |  LALT |  RALT |  H  |  J   |  K  |  L  |  ;  |  '   |
-            // | SHFT |  Z  |  X  |  C  |  V  |  B  |               |  N  |  M   |  ,  |  .  |  /  | ESC  |
+            // |  TAB |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D   |  L  |  '? |  Q  |  X  |
+            // | CTRL |  A  |  I  |  E  |  U  |  ,; |  none |  none |  P  |  T   |  S  |  R  |  N  |  !  |
+            // | SHFT |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C   |  M  |  H  |  V  | Z   |
             //                    | GUI | LWR | SPC |               | ENT | RSE  | ALT |
 
             bindings = <
-&kp TAB    &kp BACKSPACE  &kp J  &kp O     &kp E       &kp B         &none  &none  &kp F    &kp D  &kp L     &kp SINGLE_QUOTE  &kp Q  &kp X
-&kp LCTRL  &kp A          &kp I  &kp E     &kp U       &kp KP_COMMA  &none  &none  &kp P    &kp T  &kp S     &kp R             &kp N  &kp SQT
-&kp LSHFT  &kp K          &kp Y  &kp E     &kp PERIOD  &kp W                       &kp G    &kp C  &kp M     &kp H             &kp V  &kp Z
+&kp TAB    &uc UC_FR_A_GRAVE  &kp J  &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D  &kp L     &QMARK_OPT  &kp Q  &kp X
+&kp LCTRL  &kp A              &kp I  &kp E             &kp U             &COMMA_OPT &none  &none  &kp P    &kp T  &kp S     &kp R       &kp N  &kp EXCL
+&kp LSHFT  &kp K              &kp Y  &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C  &kp M     &kp H       &kp V  &kp Z
                                  &kp LGUI  &mo 0       &kp SPACE                   &kp RET  &mo 0  &kp RALT
             >;
-
-            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_PREV C_NEXT &inc_dec_kp C_BRI_DN C_BRI_UP>;
         };
     };
 };
