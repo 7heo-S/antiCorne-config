@@ -53,7 +53,7 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
 &kp TAB    &uc UC_FR_A_GRAVE  &kp J  &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D  &kp L     &QMARK_OPT  &kp Q  &kp X
 &kp LCTRL  &kp A              &kp I  &kp E             &kp U             &COMMA_OPT &none  &none  &kp P    &kp T  &kp S     &kp R       &kp N  &kp EXCL
 &kp LSHFT  &kp K              &kp Y  &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C  &kp M     &kp H       &kp V  &kp Z
-                                 &kp ESC  &kp TAB  &kp SPACE             &kp RET  &BSPC  &kp DEL
+                                 &kp ESC  &kp TAB  &kp SPACE             &kp RET  &kp BSPC  &kp DEL
             >;
         };
     };
