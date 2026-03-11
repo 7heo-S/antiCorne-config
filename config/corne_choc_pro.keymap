@@ -70,7 +70,7 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
             &none  &none  &none  &none &none &kp LBKT &none  &none  &kp RBKT  &kp 0  &kp 7  &hp 8   &kp 9  &none
             &none  &none  &none  &none &none &kp LPAR &none  &none  &kp RPAR  &kp 0  &kp 4  &kp 5   &kp 6  &none
             &none  &none  &none  &none &none &kp LBRC               &kp RBRC  &kp 0  &kp 1  &kp 2   &kp 3  &none
-                                 &kp ESC  &kp TAB  &kp SPACE             &kp trans &kp BSPC  &kp DEL
+                                 &kp ESC  &kp TAB  &kp SPACE             &trans &kp BSPC  &kp DEL
             >;
         };
     };
