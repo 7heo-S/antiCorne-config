@@ -95,15 +95,15 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
             display-name = "<^>";
 
             // --------------------------------------------------------------------------------
-            // |  n  |  n  |  n  |  n  |  n  |  [  |  none |  none |  ]  |  0  |  7  |  8 |  9  |  n  |
-            // |  n  |  n  |  n  |  n  |  n  |  (  |  none |  none |  )  |  0  |  4  |  5 |  6  |  n  |
-            // |  n  |  n  |  n  |  n  |  n  |  {  |               |  }  |  0  |  1  |  2 |  3  |  n  |
+            // |  n  |  n  |snd -|snd x|snd +|  n  |  none |  none |  n  |undo |  ^  |redo |  n  |  n  |
+            // |  n  |SUPER| ALT |CTRL |SHIFT|  n  |  none |  none | prev|  <  | dwn |  >  |next |  n  |
+            // |  n  |  n  |prev | ||> |next |  n  |               |  n  | cut |copy |paste|  n  |  n  |
             //                    | ESC | TAB | -- |               |ENTER|BACKS| DEL |
 
             bindings = <
-            &none  &none  &none  &none &none &kp LBKT &none  &none  &kp RBKT  &kp N0  &kp N7 &kp N8  &kp N9  &none
-            &none  &none  &none  &none &none &kp LPAR &none  &none  &kp RPAR  &kp N0  &kp N4 &kp N5  &kp N6  &none
-            &none  &none  &none  &none &none &kp LBRC               &kp RBRC  &kp N0  &kp N1 &kp N2  &kp N3  &none
+            &none  &none     &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &none &none  &none  &none      &kp K_UNDO &kp UP     &kp K_REDO  &none       &none
+            &none  &kp LGUI  &kp LALT     &kp LCTRL  &kp LSHFT    &none &none  &none  &kp C_PREV &kp LEFT   &kp DOWN   &kp RIGHT   &kp C_NEXT  &none
+            &none  &none     &kp C_PREV   &kp C_PP   &kp C_NEXT   &none               &none      &kp K_CUT  &kp K_COPY &kp K_PASTE &none       &none
                                  &kp ESC  &kp TAB  &trans             &kp RET &kp BSPC  &kp DEL
             >;
         };
