@@ -86,9 +86,9 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
             //                    | ESC | TAB |SPACE|               |ENTER| -- | DEL |
 
             bindings = <
-            &none         &none           &none          &uc UC_EL_OMIKRON &uc UC_EL_THETA   &uc UC_EL_BETA &none &none &uc UC_EL_PHI   &uc UC_EL_DELTA &uc UC_EL_LAMBDA &none          &none     &uc UC_EL_XI
-            &none         &UC_EL_ALPHA    &uc UC_EL_IOTA &uc UC_EL_EPSILON &uc UC_EL_UPSILON &none          &none &none &uc UC_EL_PI    &uc UC_EL_TAU   &uc UC_EL_SIGMA  &uc UC_EL_RHO  &EC_EL_NU &none
-            &uc UC_EL_PSI &uc UC_EL_KAPPA &none          &none             &none             &uc UC_EL_OMEGA            &uc UC_EL_GAMMA &uc UC_EL_CHI   &uc UC_EL_MU     &uc UC_EL_ETA  &none     &uc UC_EL_ZETA
+            &none         &none           &none          &uc UC_EL_OMIKRON &uc UC_EL_THETA   &uc UC_EL_BETA &none &none &uc UC_EL_PHI   &uc UC_EL_DELTA &uc UC_EL_LAMBDA &none          &none        &uc UC_EL_XI
+            &none         &uc UC_EL_ALPHA &uc UC_EL_IOTA &uc UC_EL_EPSILON &uc UC_EL_UPSILON &none          &none &none &uc UC_EL_PI    &uc UC_EL_TAU   &uc UC_EL_SIGMA  &uc UC_EL_RHO  &uc UC_EL_NU &none
+            &uc UC_EL_PSI &uc UC_EL_KAPPA &none          &none             &none             &uc UC_EL_OMEGA            &uc UC_EL_GAMMA &uc UC_EL_CHI   &uc UC_EL_MU     &uc UC_EL_ETA  &none        &uc UC_EL_ZETA
                                  &kp ESC  &kp TAB  &kp SPACE             &kp RET &trans  &kp DEL
             >;
         };
