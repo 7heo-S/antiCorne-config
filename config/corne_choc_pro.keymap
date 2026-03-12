@@ -53,7 +53,7 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
             &kp TAB    &uc UC_FR_A_GRAVE  &kp J  &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D  &kp L     &kp SQT  &kp Q  &kp X
             &kp LCTRL  &kp A              &kp I  &kp E             &kp U             &COMMA_OPT &none  &none  &kp P    &kp T  &kp S     &kp R    &kp N  &QMARK_OPT
             &kp LSHFT  &kp K              &kp Y  &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C  &kp M     &kp H    &kp V  &kp Z
-                                 &kp ESC  &kp TAB  &kp SPACE             &lt 1 RET   &kp BSPC  &kp DEL
+                                 &kp ESC  &lt 4 TAB  &lt 3 SPACE             &lt 1 RET   &lt 2 BSPC  &kp DEL
             >;
         };
 
@@ -64,7 +64,7 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
             // |  n  |  n  |  n  |  n  |  n  |  [  |  none |  none |  ]  |  0  |  7  |  8 |  9  |  n  |
             // |  n  |  n  |  n  |  n  |  n  |  (  |  none |  none |  )  |  0  |  4  |  5 |  6  |  n  |
             // |  n  |  n  |  n  |  n  |  n  |  {  |               |  }  |  0  |  1  |  2 |  3  |  n  |
-            //                    | ESC | TAB |SPACE|               |ENTER|BACKS| DEL |
+            //                   | ESC | TAB |SPACE|               | --- |BACKS| DEL |
 
             bindings = <
             &none  &none  &none  &none &none &kp LBKT &none  &none  &kp RBKT  &kp N0  &kp N7 &kp N8  &kp N9  &none
@@ -73,5 +73,57 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
                                  &kp ESC  &kp TAB  &kp SPACE             &trans &kp BSPC  &kp DEL
             >;
         };
+
+        greek_layer {
+            display-name = "GREEK";
+
+            // --------------------------------------------------------------------------------
+            // |  n  |  n  |  n  |  n  |  n  |  [  |  none |  none |  ]  |  0  |  7  |  8 |  9  |  n  |
+            // |  n  |  n  |  n  |  n  |  n  |  (  |  none |  none |  )  |  0  |  4  |  5 |  6  |  n  |
+            // |  n  |  n  |  n  |  n  |  n  |  {  |               |  }  |  0  |  1  |  2 |  3  |  n  |
+            //                    | ESC | TAB |SPACE|               |ENTER| -- | DEL |
+
+            bindings = <
+            &none  &none  &none  &none &none &kp LBKT &none  &none  &kp RBKT  &kp N0  &kp N7 &kp N8  &kp N9  &none
+            &none  &none  &none  &none &none &kp LPAR &none  &none  &kp RPAR  &kp N0  &kp N4 &kp N5  &kp N6  &none
+            &none  &none  &none  &none &none &kp LBRC               &kp RBRC  &kp N0  &kp N1 &kp N2  &kp N3  &none
+                                 &kp ESC  &kp TAB  &kp SPACE             &kp RET &trans  &kp DEL
+            >;
+        };
+
+        navigation_layer {
+            display-name = "<^>";
+
+            // --------------------------------------------------------------------------------
+            // |  n  |  n  |  n  |  n  |  n  |  [  |  none |  none |  ]  |  0  |  7  |  8 |  9  |  n  |
+            // |  n  |  n  |  n  |  n  |  n  |  (  |  none |  none |  )  |  0  |  4  |  5 |  6  |  n  |
+            // |  n  |  n  |  n  |  n  |  n  |  {  |               |  }  |  0  |  1  |  2 |  3  |  n  |
+            //                    | ESC | TAB | -- |               |ENTER|BACKS| DEL |
+
+            bindings = <
+            &none  &none  &none  &none &none &kp LBKT &none  &none  &kp RBKT  &kp N0  &kp N7 &kp N8  &kp N9  &none
+            &none  &none  &none  &none &none &kp LPAR &none  &none  &kp RPAR  &kp N0  &kp N4 &kp N5  &kp N6  &none
+            &none  &none  &none  &none &none &kp LBRC               &kp RBRC  &kp N0  &kp N1 &kp N2  &kp N3  &none
+                                 &kp ESC  &kp TAB  &trans             &kp RET &kp BSPC  &kp DEL
+            >;
+        };
+
+        function_layer {
+            display-name = "FUNC";
+
+            // --------------------------------------------------------------------------------
+            // |BTCLR|BT  5|BT  4|BT  3|BT  2|BT  1|  none |  none |  n  |  0  | F7 | F8 | F9 | F12|
+            // | RGB |SUPER| ALT |CTRL |SHIFT|  n  |  none |  none |  n  |  0  | F4 | F5 | F6 | F11|
+            // |  n  |  n  |  n  |  n  |  n  |  n  |               |  n  |  0  | F1 | F2 | F3 | F10|
+            //                    | ESC | --- |SPACE|               |ENTER|BACKS| DEL |
+
+            bindings = <
+            &bt BT_CLR      &bt BT_SEL 4 &bt BT_SEL 3 &bt BT_SEL 2 &bt BT_SEL 1 &bt BT_SEL 0 &none  &none  &none  &none  &kp F7 &kp F8  &kp F9  &kp F12
+            &rgb_ug RGB_TOG &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none        &none  &none  &none  &none  &kp F4 &kp F5  &kp F6  &kp F11
+            &none           &none        &none        &none        &none        &none                      &none  &none  &kp F1 &kp F2  &kp F3  &kp F10
+                                 &kp ESC  &trans  &kp SPACE             &kp RET &kp BSPC  &kp DEL
+            >;
+        };
+
     };
 };
