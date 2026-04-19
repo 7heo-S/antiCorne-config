@@ -108,16 +108,16 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             display-name = "OPTIMOT";
 
             // --------------------------------------------------------------------------------
-            // |  TAB |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L  |  '" |  Q  |  X  |
+            // |  ^   |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L  | '"` |  Q  |  X  |
             // | /|\  |  A  |  I  |  E  |  U  |  ,; |  none |  none |  P  |  T  |  S  |  R  |  N  |  ?! |
-            // | SHFT |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C  |  M  |  H  |  V  |  Z  |
+            // | - _  |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C  |  M  |  H  |  V  |  Z  |
             //                    | ESC | TAB |SPACE|               |ENTER|BACKS| DEL |
 
             bindings = <
-            &kp TAB    &uc UC_FR_A_GRAVE  &kp J        &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &QUOT_OPT &kp Q       &kp X
+            &kp CARET  &uc UC_FR_A_GRAVE  &kp J        &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &QUOT_OPT &kp Q       &kp X
             &SLSH_OPT  &hml LGUI A        &hml LALT I  &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &hmr RCTRL S &hmr RALT R  &hmr RGUI N &QMARK_OPT
-            &kp LSHFT  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C        &kp M        &kp H        &kp V       &kp Z
-                                 &kp ESC  &lt 4 TAB  &SPACE_OPT     &lt 1 RET   &lt 2 BSPC  &kp DEL
+            &kp MINUS  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C        &kp M        &kp H        &kp V       &kp Z
+                                 &kp ESC  &lt 4 TAB    &lt 3 SPACE       &lt 1 RET   &lt 2 BSPC  &kp DEL
             >;
         };
 
@@ -125,15 +125,15 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             display-name = "SYMBOL";
 
             // --------------------------------------------------------------------------------
-            // |  n  |  n  |  n  |  n  |  n  |  [  |  none |  none |  ]  |  0  |  7  |  8  |  9  |  n  |
-            // |  n  |  n  |  n  |  n  |  n  |  (  |  none |  none |  )  |  0  |  4  |  5  |  6  |  n  |
-            // |  n  |  n  |  n  |  n  |  n  |  {  |               |  }  |  0  |  1  |  2  |  3  |  n  |
+            // |  n  |  n  |  %  |  &  |  $  |  [  |  none |  none |  ]  |  @  |  7  |  8  |  9  |  n  |
+            // |  n  |  n  |  +  |  =  |  *  |  (  |  none |  none |  )  |  0  |  4  |  5  |  6  |  n  |
+            // |  n  |  n  |  <  |  n  |  >  |  {  |               |  }  |  #  |  1  |  2  |  3  |  n  |
             //                   | ESC | TAB |SPACE|               | --- |BACKS| DEL |
 
             bindings = <
-            &none  &none  &none  &none &none &kp LBKT &none  &none  &kp RBKT  &kp N0  &kp N7 &kp N8  &kp N9  &none
-            &none  &none  &none  &none &none &kp LPAR &none  &none  &kp RPAR  &kp N0  &kp N4 &kp N5  &kp N6  &none
-            &none  &none  &none  &none &none &kp LBRC               &kp RBRC  &kp N0  &kp N1 &kp N2  &kp N3  &none
+            &none  &none  &kp PRCNT &kp AMPS  &kp DLLR &kp LBKT &none  &none  &kp RBKT  &kp AT   &kp N7 &kp N8  &kp N9  &none
+            &none  &none  &kp PLUS  &kp EQUAL &kp STAR &kp LPAR &none  &none  &kp RPAR  &kp N0   &kp N4 &kp N5  &kp N6  &none
+            &none  &none  &kp GT    &kp MINUS &kp LT   &kp LBRC               &kp RBRC  &kp HASH &kp N1 &kp N2  &kp N3  &none
                                  &kp ESC  &kp TAB  &kp SPACE             &trans &kp BSPC  &kp DEL
             >;
         };
