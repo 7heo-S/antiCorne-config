@@ -117,7 +117,7 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             &kp CARET  &uc UC_FR_A_GRAVE  &kp J        &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &QUOT_OPT &kp Q       &kp X
             &SLSH_OPT  &hml LGUI A        &hml LALT I  &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &hmr RCTRL S &hmr RALT R  &hmr RGUI N &QMARK_OPT
             &kp MINUS  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C        &kp M        &kp H        &kp V       &kp Z
-                                 &kp ESC  &lt 2 TAB    &lt 1 SPACE       &lt 3 RET   &lt 4 BSPC  &kp DEL
+                                                       &lt 4 ESC         &lt 2 TAB         &lt 1 SPACE              &lt 3 RET &kp BSPC   &kp DEL
             >;
         };
 
