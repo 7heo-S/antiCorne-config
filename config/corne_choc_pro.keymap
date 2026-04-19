@@ -62,7 +62,7 @@ ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
 )
 
 // tap: / alt + tap: \ (base for nesting)
-ZMK_BEHAVIOR(SQT_GRAVE, mod_morph,
+ZMK_BEHAVIOR(FBSLASH, mod_morph,
     bindings = <&kp SLASH>, <&kp BACKSLASH>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
