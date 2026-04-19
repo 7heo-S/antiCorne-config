@@ -47,7 +47,7 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
             tapping-term-ms = <280>;
             quick-tap-ms = <175>;
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = < 6 7 8 9 10 11 18 19 20 21 22 23 >; // List of keys on the right side of the keyboard
+            hold-trigger-key-positions = < 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 37 38 39>; // List of keys on the right side of the keyboard
             hold-trigger-on-release;
         };
         hmr: home_row_mod_right {
@@ -58,7 +58,7 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
             tapping-term-ms = <280>;
             quick-tap-ms = <175>;
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = < 0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29>; // List of keys on the left side of the keyboard
+            hold-trigger-key-positions = < 0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 34 35 36>; // List of keys on the left side of the keyboard
             hold-trigger-on-release;
         };
     };
@@ -79,9 +79,9 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
             //                    | ESC | TAB |SPACE|               |ENTER|BACKS| DEL |
 
             bindings = <
-            &kp TAB    &uc UC_FR_A_GRAVE  &kp J  &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L     &kp SQT  &kp Q  &kp X
-            &kp LCTRL  &kp A              &kp I  &kp E             &hml LSHFT U      &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &kp S     &kp R    &kp N  &QMARK_OPT
-            &kp LSHFT  &kp K              &kp Y  &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C        &kp M     &kp H    &kp V  &kp Z
+            &kp TAB    &uc UC_FR_A_GRAVE  &kp J        &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &kp SQT     &kp Q       &kp X
+            &kp LCTRL  &hml LGUI A        &hml LALT I  &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &hmr RCTRL S &hmr RALT R &hmr RGUI N &QMARK_OPT
+            &kp LSHFT  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C        &kp M        &kp H       &kp V       &kp Z
                                  &kp ESC  &lt 4 TAB  &lt 3 SPACE             &lt 1 RET   &lt 2 BSPC  &kp DEL
             >;
         };
@@ -90,9 +90,9 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
             display-name = "SYMBOL";
 
             // --------------------------------------------------------------------------------
-            // |  n  |  n  |  n  |  n  |  n  |  [  |  none |  none |  ]  |  0  |  7  |  8 |  9  |  n  |
-            // |  n  |  n  |  n  |  n  |  n  |  (  |  none |  none |  )  |  0  |  4  |  5 |  6  |  n  |
-            // |  n  |  n  |  n  |  n  |  n  |  {  |               |  }  |  0  |  1  |  2 |  3  |  n  |
+            // |  n  |  n  |  n  |  n  |  n  |  [  |  none |  none |  ]  |  0  |  7  |  8  |  9  |  n  |
+            // |  n  |  n  |  n  |  n  |  n  |  (  |  none |  none |  )  |  0  |  4  |  5  |  6  |  n  |
+            // |  n  |  n  |  n  |  n  |  n  |  {  |               |  }  |  0  |  1  |  2  |  3  |  n  |
             //                   | ESC | TAB |SPACE|               | --- |BACKS| DEL |
 
             bindings = <
