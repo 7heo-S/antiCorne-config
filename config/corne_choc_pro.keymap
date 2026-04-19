@@ -117,7 +117,7 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             &kp CARET  &uc UC_FR_A_GRAVE  &kp J        &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &QUOT_OPT &kp Q       &kp X
             &SLSH_OPT  &hml LGUI A        &hml LALT I  &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &hmr RCTRL S &hmr RALT R  &hmr RGUI N &QMARK_OPT
             &kp MINUS  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C        &kp M        &kp H        &kp V       &kp Z
-                                 &kp ESC  &lt 4 TAB    &lt 3 SPACE       &lt 1 RET   &lt 2 BSPC  &kp DEL
+                                 &kp ESC  &lt 2 TAB    &lt 1 SPACE       &lt 3 RET   &lt 4 BSPC  &kp DEL
             >;
         };
 
@@ -145,7 +145,7 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             // |  n  |  n  |  n  |omikr|theta| beta|  none |  none | phi |delta|lambd|  n |  n  |  xi |
             // |  n  |alpha|iota |epsil|upsil|  n  |  none |  none | pi  | tau |sigma|rho |  nu |  n  |
             // | psi |kappa|  n  |  n  |  n  |omega|               |gamma| chi | mu  |eta |  n  |zeta |
-            //                    | ESC | TAB |SPACE|               |ENTER| -- | DEL |
+            //                   | ESC | TAB |SPACE|               |ENTER| -- | DEL |
 
             bindings = <
             &none         &none           &none          &uc UC_EL_OMIKRON &uc UC_EL_THETA   &uc UC_EL_BETA &none &none &uc UC_EL_PHI   &uc UC_EL_DELTA &uc UC_EL_LAMBDA &none          &none        &uc UC_EL_XI
@@ -176,9 +176,9 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             display-name = "FUNC";
 
             // --------------------------------------------------------------------------------
-            // |BTCLR|BT  5|BT  4|BT  3|BT  2|BT  1|  none |  none |  n  |  0  | F7 | F8 | F9 | F12|
-            // | RGB |SUPER| ALT |CTRL |SHIFT|  n  |  none |  none |  n  |  0  | F4 | F5 | F6 | F11|
-            // |  n  |  n  |  n  |  n  |  n  |  n  |               |  n  |  0  | F1 | F2 | F3 | F10|
+            // |BTCLR|BT  5|BT  4|BT  3|BT  2|BT  1|  none |  none |  n  |  n  | F7 | F8 | F9 | F12|
+            // | RGB |SUPER| ALT |CTRL |SHIFT|  n  |  none |  none |  n  |  n  | F4 | F5 | F6 | F11|
+            // |  n  |  n  |  n  |  n  |  n  |  n  |               |  n  |  n  | F1 | F2 | F3 | F10|
             //                    | ESC | --- |SPACE|               |ENTER|BACKS| DEL |
 
             bindings = <
