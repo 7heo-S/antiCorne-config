@@ -127,14 +127,14 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             // --------------------------------------------------------------------------------
             // |  n  |  n  |  %  |  &  |  $  |  [  |  none |  none |  ]  |  @  |  7  |  8  |  9  |  n  |
             // |  n  |  n  |  +  |  =  |  *  |  (  |  none |  none |  )  |  0  |  4  |  5  |  6  |  n  |
-            // |  n  |  n  |  <  |  n  |  >  |  {  |               |  }  |  #  |  1  |  2  |  3  |  n  |
+            // |  n  |  n  |  <  |  -  |  >  |  {  |               |  }  |  #  |  1  |  2  |  3  |  n  |
             //                   | ESC | TAB | --- |               |BACKS|ENTER| DEL |
 
             bindings = <
             &none  &none  &kp PRCNT &kp AMPS  &kp DLLR &kp LBKT &none  &none  &kp RBKT  &kp AT   &kp N7 &kp N8  &kp N9  &none
             &none  &none  &kp PLUS  &kp EQUAL &kp STAR &kp LPAR &none  &none  &kp RPAR  &kp N0   &kp N4 &kp N5  &kp N6  &none
             &none  &none  &kp GT    &kp MINUS &kp LT   &kp LBRC               &kp RBRC  &kp HASH &kp N1 &kp N2  &kp N3  &none
-                                    &kp ESC   &kp TAB  &trans                 &kp BSPC  &RET     &kp DEL
+                                    &kp ESC   &kp TAB  &none                  &kp BSPC  &kp RET  &kp DEL
             >;
         };
 
@@ -151,7 +151,7 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             &none         &none           &none          &uc UC_EL_OMIKRON &uc UC_EL_THETA   &uc UC_EL_BETA &none &none &uc UC_EL_PHI   &uc UC_EL_DELTA &uc UC_EL_LAMBDA &none          &none        &uc UC_EL_XI
             &none         &uc UC_EL_ALPHA &uc UC_EL_IOTA &uc UC_EL_EPSILON &uc UC_EL_UPSILON &none          &none &none &uc UC_EL_PI    &uc UC_EL_TAU   &uc UC_EL_SIGMA  &uc UC_EL_RHO  &uc UC_EL_NU &none
             &uc UC_EL_PSI &uc UC_EL_KAPPA &none          &none             &none             &uc UC_EL_OMEGA            &uc UC_EL_GAMMA &uc UC_EL_CHI   &uc UC_EL_MU     &uc UC_EL_ETA  &none        &uc UC_EL_ZETA
-                                                         &kp ESC           &trans           &kp SPACE                  &kp BSPC         &kp RET  &kp DEL
+                                                         &kp ESC           &none            &kp SPACE                  &kp BSPC         &kp RET  &kp DEL
             >;
         };
 
@@ -168,7 +168,7 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             &none  &none     &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &none &none  &none  &none      &kp K_UNDO &kp UP     &kp K_REDO  &none       &none
             &none  &kp LGUI  &kp LALT     &kp LCTRL  &kp LSHFT    &none &none  &none  &kp C_PREV &kp LEFT   &kp DOWN   &kp RIGHT   &kp C_NEXT  &none
             &none  &none     &kp C_PREV   &kp C_PP   &kp C_NEXT   &none               &none      &kp K_CUT  &kp K_COPY &kp K_PASTE &none       &none
-                             &kp ESC      &kp TAB    &kp SPACE                        &kp BSPC   &trans     &kp DEL
+                             &kp ESC      &kp TAB    &kp SPACE                        &kp BSPC   &none      &kp DEL
             >;
         };
 
@@ -185,7 +185,7 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             &bt BT_CLR      &bt BT_SEL 4 &bt BT_SEL 3 &bt BT_SEL 2 &bt BT_SEL 1 &bt BT_SEL 0 &none  &none  &none  &none  &kp F7 &kp F8  &kp F9  &kp F12
             &rgb_ug RGB_TOG &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none        &none  &none  &none  &none  &kp F4 &kp F5  &kp F6  &kp F11
             &none           &none        &none        &none        &none        &none                      &none  &none  &kp F1 &kp F2  &kp F3  &kp F10
-                                                      &trans       &kp TAB      &kp SPACE                  &kp BSPC &kp RET  &kp DEL
+                                                      &none        &kp TAB      &kp SPACE                  &kp BSPC &kp RET  &kp DEL
             >;
         };
 
