@@ -133,7 +133,7 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             bindings = <
             &none  &kp HASH  &kp PRCNT &kp AMPS  &kp DLLR &kp LBKT &none  &none  &kp RBKT  &kp N7        &kp N8        &kp N9       &none   &none
             &none  &SLSH_OPT &kp PLUS  &kp EQUAL &kp STAR &kp LPAR &none  &none  &kp RPAR  &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0  &none
-            &none  &kp AT    &kp GT    &kp MINUS &kp LT   &kp LBRC               &kp RBRC  &kp N1        &kp N2        &kp N3       &kp DOT &COMMA
+            &none  &kp AT    &kp GT    &kp MINUS &kp LT   &kp LBRC               &kp RBRC  &kp N1        &kp N2        &kp N3       &kp DOT &kp COMMA
                                        &kp ESC   &kp TAB  &none                  &kp BSPC  &kp RET  &kp DEL
             >;
         };
