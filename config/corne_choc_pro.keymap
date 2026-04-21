@@ -33,23 +33,15 @@ ZMK_BEHAVIOR(DOT_OPT, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
+// ?!
 // tap: question mark | shift + tap exclamation mark
 ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
     bindings = <&kp QMARK>, <&kp EXCL>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-// wrap lt 3 SPACE so mod_morph can reference it
-ZMK_BEHAVIOR(lt3_space, macro,
-    bindings = <&lt 3 SPACE>;
-)
-// tap: space (or layer 3 on hold) | shift + tap: _
-ZMK_BEHAVIOR(SPACE_OPT, mod_morph,
-    bindings = <&lt3_space>, <&kp UNDERSCORE>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
 
-
+//  '"`
 // tap: apostrophe | alt + tap: backtick (base for nesting)
 ZMK_BEHAVIOR(SQT_GRAVE, mod_morph,
     bindings = <&kp SQT>, <&kp GRAVE>;
@@ -60,7 +52,7 @@ ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
     bindings = <&SQT_GRAVE>, <&kp DQT>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
-
+// /|\
 // tap: / alt + tap: \ (base for nesting)
 ZMK_BEHAVIOR(FBSLASH, mod_morph,
     bindings = <&kp SLASH>, <&kp BACKSLASH>;
@@ -72,13 +64,25 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
+// -_~
+// tap: - alt + tap: ~ (base for nesting)
+ZMK_BEHAVIOR(DASHTILDE, mod_morph,
+    bindings = <&kp MINUS>, <&kp TILDE>;
+    mods = <(MOD_LALT|MOD_RALT)>;
+)
+// tap: - (or ~ on alt) | shift + tap: _
+ZMK_BEHAVIOR(DASH_OPT, mod_morph,
+    bindings = <&DASHTILDE>, <&kp UNDERSCORE>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
 / {
     behaviors {
         hml: home_row_mod_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
-            require-prior-idle-ms = <50>;
+            require-prior-idle-ms = <0>;
             tapping-term-ms = <280>;
             quick-tap-ms = <175>;
             bindings = <&kp>, <&kp>;
@@ -89,7 +93,7 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
-            require-prior-idle-ms = <50>;
+            require-prior-idle-ms = <0>;
             tapping-term-ms = <280>;
             quick-tap-ms = <175>;
             bindings = <&kp>, <&kp>;
@@ -110,13 +114,13 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             // --------------------------------------------------------------------------------
             // |  ^   |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L  | '"` |  Q  |  X  |
             // | /|\  |  A  |  I  |  E  |  U  |  ,; |  none |  none |  P  |  T  |  S  |  R  |  N  |  ?! |
-            // | - _  |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C  |  M  |  H  |  V  |  Z  |
+            // | -_~  |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C  |  M  |  H  |  V  |  Z  |
             //                    | ESC | TAB |SPACE|               |BACKS|ENTER| DEL |
 
             bindings = <
             &kp CARET  &uc UC_FR_A_GRAVE  &kp J        &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &QUOT_OPT &kp Q       &kp X
             &SLSH_OPT  &hml LGUI A        &hml LALT I  &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &hmr RCTRL S &hmr LALT R  &hmr RGUI N &QMARK_OPT
-            &kp MINUS  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C        &kp M        &kp H        &kp V       &kp Z
+            &DASH_OPT  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C        &kp M        &kp H        &kp V       &kp Z
                                                        &lt 4 ESC         &lt 2 TAB         &lt 1 SPACE              &kp BSPC &lt 3 RET    &kp DEL
             >;
         };
@@ -127,13 +131,13 @@ ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
             // --------------------------------------------------------------------------------
             // |  n  |  #  |  %  |  &  |  $  |  [  |  none |  none |  ]  |  7  |  8  |  9  |  n  |  n  |
             // |  n  | /|\ |  +  |  =  |  *  |  (  |  none |  none |  )  |  4  |  5  |  6  |  0  |  n  |
-            // |  n  |  @  |  <  |  -  |  >  |  {  |               |  }  |  1  |  2  |  3  |  .  |  ,  |
+            // |  n  |  @  |  <  | -_~ |  >  |  {  |               |  }  |  1  |  2  |  3  |  .  |  ,  |
             //                   | ESC | TAB | --- |               |BACKS|ENTER| DEL |
 
             bindings = <
             &none  &kp HASH  &kp PRCNT &kp AMPS  &kp DLLR &kp LBKT &none  &none  &kp RBKT  &kp N7        &kp N8        &kp N9       &none   &none
             &none  &SLSH_OPT &kp PLUS  &kp EQUAL &kp STAR &kp LPAR &none  &none  &kp RPAR  &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0  &none
-            &none  &kp AT    &kp LT    &kp MINUS &kp GT   &kp LBRC               &kp RBRC  &kp N1        &kp N2        &kp N3       &kp DOT &kp COMMA
+            &none  &kp AT    &kp LT    &DASH_OPT &kp GT   &kp LBRC               &kp RBRC  &kp N1        &kp N2        &kp N3       &kp DOT &kp COMMA
                                        &kp ESC   &kp TAB  &none                  &kp BSPC  &kp RET  &kp DEL
             >;
         };
