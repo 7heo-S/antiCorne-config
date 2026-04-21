@@ -129,15 +129,15 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
             display-name = "SYMBOL";
 
             // --------------------------------------------------------------------------------
-            // |  n  |  #  |  %  |  &  |  $  |  [  |  none |  none |  ]  |  7  |  8  |  9  |  n  |  n  |
+            // |  n  |  %  |  &  |  ^  |  $  |  [  |  none |  none |  ]  |  7  |  8  |  9  |  #  |  n  |
             // |  n  | /|\ |  +  |  =  |  *  |  (  |  none |  none |  )  |  4  |  5  |  6  |  0  |  n  |
             // |  n  |  @  |  <  | -_~ |  >  |  {  |               |  }  |  1  |  2  |  3  |  .  |  ,  |
             //                   | ESC | TAB | --- |               |BACKS|ENTER| DEL |
 
             bindings = <
-            &none  &kp HASH  &kp PRCNT &kp AMPS  &kp DLLR &kp LBKT &none  &none  &kp RBKT  &kp N7        &kp N8        &kp N9       &none   &none
-            &none  &SLSH_OPT &kp PLUS  &kp EQUAL &kp STAR &kp LPAR &none  &none  &kp RPAR  &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0  &none
-            &none  &kp AT    &kp LT    &DASH_OPT &kp GT   &kp LBRC               &kp RBRC  &kp N1        &kp N2        &kp N3       &kp DOT &kp COMMA
+            &none  &kp PRCNT &kp AMPS &kp CARET &kp DLLR &kp LBKT &none  &none  &kp RBKT  &kp N7        &kp N8        &kp N9       &kp HASH &none
+            &none  &SLSH_OPT &kp PLUS  &kp EQUAL &kp STAR &kp LPAR &none  &none  &kp RPAR  &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0   &none
+            &none  &kp AT    &kp LT    &DASH_OPT &kp GT   &kp LBRC               &kp RBRC  &kp N1        &kp N2        &kp N3       &kp DOT  &kp COMMA
                                        &kp ESC   &kp TAB  &none                  &kp BSPC  &kp RET  &kp DEL
             >;
         };
