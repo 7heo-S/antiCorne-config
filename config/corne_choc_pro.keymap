@@ -170,7 +170,7 @@ ZMK_BEHAVIOR(u_hatm, macro,
         compatible = "zmk,combos";
         combo_oe {
             timeout-ms = <20>;
-            key-positions = <o e>;
+            key-positions = <O E>;
             bindings = <&uc UC_FR_OE>;
         };
     };
