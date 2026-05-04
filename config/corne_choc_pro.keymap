@@ -42,38 +42,32 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-// Modifier-masking helpers: same key both sides, mod gets swallowed
-ZMK_BEHAVIOR(masked_grave, mod_morph,
-    bindings = <&kp GRAVE>, <&kp GRAVE>;
-    mods = <(MOD_LALT|MOD_RALT)>;
-)
 
-ZMK_BEHAVIOR(masked_bslh, mod_morph,
-    bindings = <&kp BACKSLASH>, <&kp BACKSLASH>;
-    mods = <(MOD_LALT|MOD_RALT)>;
-)
-
-// tap: ' | shift: "
-ZMK_BEHAVIOR(SQT_DQT, mod_morph,
+// '`"
+// tap: - alt + tap: ~ (base for nesting)
+ZMK_BEHAVIOR(SINGLEDOUBLE, mod_morph,
     bindings = <&kp SQT>, <&kp DQT>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-// tap: '/\" | alt: ` (alt swallowed)
-ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
-    bindings = <&SQT_DQT>, <&masked_grave>;
     mods = <(MOD_LALT|MOD_RALT)>;
+)
+// tap: - (or ~ on alt) | shift + tap: _
+ZMK_BEHAVIOR(DASH_OPT, mod_morph,
+    bindings = <&SINGLEDOUBLE>, <&kp GRAVE>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-// tap: / | shift: |
-ZMK_BEHAVIOR(SLASH_PIPE, mod_morph,
+
+// /\|
+// tap: slash alt + tap: pipe (base for nesting)
+ZMK_BEHAVIOR(SLASHPIPE, mod_morph,
     bindings = <&kp SLASH>, <&kp PIPE>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-// tap: /|| | alt: \ (alt swallowed)
-ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
-    bindings = <&SLASH_PIPE>, <&masked_bslh>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
+// tap: slash (or pipe on alt) | shift + tap: backslash
+ZMK_BEHAVIOR(DASH_OPT, mod_morph,
+    bindings = <&SLASHPIPE>, <&kp BACKSLASH>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
 
 // -_~
 // tap: - alt + tap: ~ (base for nesting)
@@ -111,6 +105,12 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
             hold-trigger-key-positions = < 0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 34 35 36>; // List of keys on the left side of the keyboard
             hold-trigger-on-release;
         };
+        mrph_c: mrph_c {
+            compatible = "zmk, behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp C>, <&uc UC_FR_C_CEDILLA>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        }
     };
 };
 
@@ -131,7 +131,7 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
             bindings = <
             &kp CARET  &uc UC_FR_A_GRAVE  &kp J        &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &QUOT_OPT &kp Q       &kp X
             &SLSH_OPT  &hml LGUI A        &hml LALT I  &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &hmr RCTRL S &hmr LALT R  &hmr RGUI N &QMARK_OPT
-            &DASH_OPT  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &kp C        &kp M        &kp H        &kp V       &kp Z
+            &DASH_OPT  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &mrph_c      &kp M        &kp H        &kp V       &kp Z
                                                        &lt 4 ESC         &lt 2 TAB         &lt 1 SPACE              &kp BSPC &lt 3 RET    &kp DEL
             >;
         };
