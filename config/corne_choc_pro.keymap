@@ -42,26 +42,22 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
 
 
 //  '"`
-// tap: apostrophe | alt + tap: backtick (base for nesting)
-ZMK_BEHAVIOR(SQT_GRAVE, mod_morph,
+// alt: ` | no alt: '"
+ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
     bindings = <&kp SQT>, <&kp GRAVE>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
-// tap: ' (or ` on alt) | shift + tap: "
-ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
-    bindings = <&SQT_GRAVE>, <&kp DQT>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
+
 // /|\
-// tap: / alt + tap: \ (base for nesting)
-ZMK_BEHAVIOR(FBSLASH, mod_morph,
-    bindings = <&kp SLASH>, <&kp BACKSLASH>;
-    mods = <(MOD_LALT|MOD_RALT)>;
-)
-// tap: / (or \ on alt) | shift + tap: |
-ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
-    bindings = <&FBSLASH>, <&kp PIPE>;
+// tap: / | shift + tap: |  (base for nesting)
+ZMK_BEHAVIOR(SLASH_PIPE, mod_morph,
+    bindings = <&kp SLASH>, <&kp PIPE>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+// alt: \ | no alt: /||
+ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
+    bindings = <&SLASH_PIPE>, <&kp BACKSLASH>;
+    mods = <(MOD_LALT|MOD_RALT)>;
 )
 
 // -_~
