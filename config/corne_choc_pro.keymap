@@ -50,7 +50,7 @@ ZMK_BEHAVIOR(SINGLEDOUBLE, mod_morph,
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 // tap: - (or ~ on alt) | shift + tap: _
-ZMK_BEHAVIOR(DASH_OPT, mod_morph,
+ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
     bindings = <&SINGLEDOUBLE>, <&kp GRAVE>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
