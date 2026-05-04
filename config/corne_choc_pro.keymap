@@ -42,28 +42,36 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-// Generic alt+key macro
-ZMK_BEHAVIOR(alt_kp, macro_one_param,
-    bindings = <&macro_release &kp LALT &kp RALT>,
-               <&macro_param_1to1 &macro_tap &kp MACRO_PLACEHOLDER>;
-)
-
-//  '"`
-// tap: ' | shift: " | alt: `
-ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
-    bindings = <&kp SQT>, <&alt_kp GRAVE>;
+// Modifier-masking helpers: same key both sides, mod gets swallowed
+ZMK_BEHAVIOR(masked_grave, mod_morph,
+    bindings = <&kp GRAVE>, <&kp GRAVE>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 
-// /|\
-// tap: / | shift + tap: |  (base for nesting)
+ZMK_BEHAVIOR(masked_bslh, mod_morph,
+    bindings = <&kp BACKSLASH>, <&kp BACKSLASH>;
+    mods = <(MOD_LALT|MOD_RALT)>;
+)
+
+// tap: ' | shift: "
+ZMK_BEHAVIOR(SQT_DQT, mod_morph,
+    bindings = <&kp SQT>, <&kp DQT>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+// tap: '/\" | alt: ` (alt swallowed)
+ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
+    bindings = <&SQT_DQT>, <&masked_grave>;
+    mods = <(MOD_LALT|MOD_RALT)>;
+)
+
+// tap: / | shift: |
 ZMK_BEHAVIOR(SLASH_PIPE, mod_morph,
     bindings = <&kp SLASH>, <&kp PIPE>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
-// alt: \ | no alt: /||
+// tap: /|| | alt: \ (alt swallowed)
 ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
-    bindings = <&SLASH_PIPE>, <&alt_kp BACKSLASH>;
+    bindings = <&SLASH_PIPE>, <&masked_bslh>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 
