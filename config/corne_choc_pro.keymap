@@ -93,6 +93,16 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
             hold-trigger-key-positions = < 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 37 38 39>; // List of keys on the right side of the keyboard
             hold-trigger-on-release;
         };
+        hmlm: home_row_mod_left_mm {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <140>;
+            quick-tap-ms = <100>;
+            bindings = <&kp>, <&macro>;
+            hold-trigger-key-positions = < 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 37 38 39>;
+            hold-trigger-on-release;
+        };
         hmr: home_row_mod_right {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -103,11 +113,65 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
             hold-trigger-key-positions = < 0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 34 35 36>; // List of keys on the left side of the keyboard
             hold-trigger-on-release;
         };
-        mrph_c: mrph_c {
+        c_ced: c_ced {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp C>, <&uc UC_FR_C_CEDILLA>;
             mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        a_hat: a_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp A>, <&uc UC_FR_A_CIRCUMFLEX>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        e_hat: e_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp E>, <&uc UC_FR_E_CIRCUMFLEX>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        i_hat: i_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp I>, <&uc UC_FR_I_CIRCUMFLEX>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        o_hat: o_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp O>, <&uc UC_FR_O_CIRCUMFLEX>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        u_hat: u_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp U>, <&uc UC_FR_U_CIRCUMFLEX>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+    };
+};
+
+ZMK_BEHAVIOR(a_hatm, macro,
+    bindings = <&a_hat>;
+)
+ZMK_BEHAVIOR(i_hatm, macro,
+    bindings = <&i_hat>;
+)
+ZMK_BEHAVIOR(e_hatm, macro,
+    bindings = <&e_hat>;
+)
+ZMK_BEHAVIOR(u_hatm, macro,
+    bindings = <&u_hat>;
+)
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+        combo_oe {
+            timeout-ms = <20>;
+            key-positions = <o e>;
+            bindings = <&uc UC_FR_OE>;
         };
     };
 };
@@ -121,15 +185,15 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
             display-name = "OPTIMOT";
 
             // --------------------------------------------------------------------------------
-            // |  ^   |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L  | '"` |  Q  |  X  |
-            // | /|\  |  A  |  I  |  E  |  U  |  ,; |  none |  none |  P  |  T  |  S  |  R  |  N  |  ?! |
+            // |  ^   |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L  | '`" |  Q  |  X  |
+            // | /\|  |  A  |  I  |  E  |  U  |  ,; |  none |  none |  P  |  T  |  S  |  R  |  N  |  ?! |
             // | -_~  |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C  |  M  |  H  |  V  |  Z  |
             //                    | ESC | TAB |SPACE|               |BACKS|ENTER| DEL |
 
             bindings = <
-            &kp CARET  &uc UC_FR_A_GRAVE  &kp J        &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &QUOT_OPT &kp Q       &kp X
-            &SLSH_OPT  &hml LGUI A        &hml LALT I  &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &hmr RCTRL S &hmr LALT R  &hmr RGUI N &QMARK_OPT
-            &DASH_OPT  &kp K              &kp Y        &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &mrph_c      &kp M        &kp H        &kp V       &kp Z
+            &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE  &kp J           &o_hat             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &QUOT_OPT &kp Q       &kp X
+            &SLSH_OPT         &hmlm LGUI a_hatm    &hmlm LALT i_hatm &hmlm LCTRL e_hatm       &hmlm LSHFT u_hatm  &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &hmr RCTRL S &hmr LALT R  &hmr RGUI N &QMARK_OPT
+            &DASH_OPT        &kp K              &kp Y           &uc UC_FR_E_GRAVE &DOT_OPT           &kp W                    &kp G    &c_ced       &kp M        &kp H        &kp V       &kp Z
                                                        &lt 4 ESC         &lt 2 TAB         &lt 1 SPACE              &kp BSPC &lt 3 RET    &kp DEL
             >;
         };
@@ -139,7 +203,7 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
 
             // --------------------------------------------------------------------------------
             // |  n  |  %  |  &  |  ^  |  $  |  [  |  none |  none |  ]  |  7  |  8  |  9  |  #  |  n  |
-            // |  n  | /|\ |  +  |  =  |  *  |  (  |  none |  none |  )  |  4  |  5  |  6  |  0  |  n  |
+            // |  n  | /\| |  +  |  =  |  *  |  (  |  none |  none |  )  |  4  |  5  |  6  |  0  |  n  |
             // |  n  |  @  |  <  | -_~ |  >  |  {  |               |  }  |  1  |  2  |  3  |  .  |  ,  |
             //                   | ESC | TAB | --- |               |BACKS|ENTER| DEL |
 
