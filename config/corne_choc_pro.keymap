@@ -142,7 +142,7 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
     };
 };
 
-ZMK_BEHAVIOR(hml_a, hold_tap,
+ZMK_BEHAVIOR(hmla, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
     quick-tap-ms = <100>;
@@ -151,7 +151,7 @@ ZMK_BEHAVIOR(hml_a, hold_tap,
     hold-trigger-on-release;
 )
 
-ZMK_BEHAVIOR(hml_i, hold_tap,
+ZMK_BEHAVIOR(hmli, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
     quick-tap-ms = <100>;
@@ -160,7 +160,7 @@ ZMK_BEHAVIOR(hml_i, hold_tap,
     hold-trigger-on-release;
 )
 
-ZMK_BEHAVIOR(hml_e, hold_tap,
+ZMK_BEHAVIOR(hmle, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
     quick-tap-ms = <100>;
@@ -169,7 +169,7 @@ ZMK_BEHAVIOR(hml_e, hold_tap,
     hold-trigger-on-release;
 )
 
-ZMK_BEHAVIOR(hml_u, hold_tap,
+ZMK_BEHAVIOR(hmlu, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
     quick-tap-ms = <100>;
@@ -184,7 +184,7 @@ ZMK_BEHAVIOR(hml_u, hold_tap,
         compatible = "zmk,combos";
         combo_oe {
             timeout-ms = <20>;
-            key-positions = <O E>;
+            key-positions = <3 14>;
             bindings = <&uc UC_FR_OE>;
         };
     };
