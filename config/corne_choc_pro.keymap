@@ -63,7 +63,7 @@ ZMK_BEHAVIOR(SLASHPIPE, mod_morph,
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 // tap: slash (or pipe on alt) | shift + tap: backslash
-ZMK_BEHAVIOR(SLASH_OPT, mod_morph,
+ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
     bindings = <&SLASHPIPE>, <&kp BACKSLASH>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
