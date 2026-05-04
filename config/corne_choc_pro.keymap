@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
+
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
@@ -40,11 +42,16 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
+// Generic alt+key macro
+ZMK_BEHAVIOR(alt_kp, macro_one_param,
+    bindings = <&macro_release &kp LALT &kp RALT>,
+               <&macro_param_1to1 &macro_tap &kp MACRO_PLACEHOLDER>;
+)
 
 //  '"`
-// alt: ` | no alt: '"
+// tap: ' | shift: " | alt: `
 ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
-    bindings = <&kp SQT>, <&kp GRAVE>;
+    bindings = <&kp SQT>, <&alt_kp GRAVE>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 
@@ -56,7 +63,7 @@ ZMK_BEHAVIOR(SLASH_PIPE, mod_morph,
 )
 // alt: \ | no alt: /||
 ZMK_BEHAVIOR(SLSH_OPT, mod_morph,
-    bindings = <&SLASH_PIPE>, <&kp BACKSLASH>;
+    bindings = <&SLASH_PIPE>, <&alt_kp BACKSLASH>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 
