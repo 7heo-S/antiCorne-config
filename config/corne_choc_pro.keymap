@@ -136,6 +136,14 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
     };
 };
 
+ZMK_BEHAVIOR(hm_upsilon, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <280>;
+    quick-tap-ms = <175>;
+    bindings = <&kp>, <&uc UC_EL_UPSILON>;
+    hold-trigger-key-positions = < 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 37 38 39>;
+    hold-trigger-on-release;
+)
 
 / {
     combos {
@@ -203,7 +211,7 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
 
             bindings = <
             &none         &none           &none          &uc UC_EL_OMIKRON &uc UC_EL_THETA   &uc UC_EL_BETA &none &none &uc UC_EL_PHI   &uc UC_EL_DELTA &uc UC_EL_LAMBDA &none          &none        &uc UC_EL_XI
-            &none         &uc UC_EL_ALPHA &uc UC_EL_IOTA &uc UC_EL_EPSILON &uc UC_EL_UPSILON &none          &none &none &uc UC_EL_PI    &uc UC_EL_TAU   &uc UC_EL_SIGMA  &uc UC_EL_RHO  &uc UC_EL_NU &none
+            &none         &uc UC_EL_ALPHA &uc UC_EL_IOTA &uc UC_EL_EPSILON &hm_upsilon LSHFT 0 &none          &none &none &uc UC_EL_PI    &uc UC_EL_TAU   &uc UC_EL_SIGMA  &uc UC_EL_RHO  &uc UC_EL_NU &none
             &uc UC_EL_PSI &uc UC_EL_KAPPA &none          &none             &none             &uc UC_EL_OMEGA            &uc UC_EL_GAMMA &uc UC_EL_CHI   &uc UC_EL_MU     &uc UC_EL_ETA  &none        &uc UC_EL_ZETA
                                                          &kp ESC           &none            &kp SPACE                  &kp BSPC         &kp RET  &kp DEL
             >;
