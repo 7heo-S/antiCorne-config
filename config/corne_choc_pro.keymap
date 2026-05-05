@@ -130,7 +130,7 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
         y_trema: y_trema {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp y>, <&uc UC_FR_Y_DIAERESIS>;
+            bindings = <&kp Y>, <&uc UC_FR_Y_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
     };
