@@ -14,6 +14,16 @@
 #include <zmk-unicode/keys-extra.h>  // All glyphs except CJK
 #include <zmk-helpers/helper.h>
 
+// Layer indices, referenced by name from &lt/&mo/&to bindings below instead of
+// as raw numbers, so inserting/reordering a layer doesn't silently renumber
+// every reference to the layers that follow it.
+#define DEFAULT    0
+#define SYMBOL     1
+#define GREEK      2
+#define NAVIGATION 3
+#define FUNCTION   4
+#define DIACRITICS 5
+
 / {
     chosen { zmk,physical-layout = &default_layout; };
 };
@@ -44,12 +54,12 @@ ZMK_BEHAVIOR(QMARK_OPT, mod_morph,
 
 
 // '`"
-// tap: - alt + tap: ~ (base for nesting)
+// tap: ' alt + tap: " (base for nesting)
 ZMK_BEHAVIOR(SINGLEDOUBLE, mod_morph,
     bindings = <&kp SQT>, <&kp DQT>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
-// tap: - (or ~ on alt) | shift + tap: _
+// tap: ' (or " on alt) | shift + tap: `
 ZMK_BEHAVIOR(QUOT_OPT, mod_morph,
     bindings = <&SINGLEDOUBLE>, <&kp GRAVE>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -171,16 +181,16 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
             display-name = "OPTIMOT";
 
             // --------------------------------------------------------------------------------
-            // |  ^   |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L  | '`" |  Q  |  X  |
+            // |  ù   |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L  | '`" |  Q  |  X  |
             // | /\|  |  A  |  I  |  E  |  U  |  ,; |  none |  none |  P  |  T  |  S  |  R  |  N  |  ?! |
             // | -_~  |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C  |  M  |  H  |  V  |  Z  |
             //                    | ESC | TAB |SPACE|               |BACKS|ENTER| DEL |
 
             bindings = <
-            &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &kp O             &uc UC_FR_E_ACUTE &kp B      &none  &none  &kp F    &kp D        &kp L        &QUOT_OPT &kp Q       &kp X
-            &SLSH_OPT         &hml LGUI A       &hml LALT I &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none  &none  &kp P    &hmr RSHFT T &hmr RCTRL S &hmr LALT R  &lt 5 N  &QMARK_OPT
-            &DASH_OPT         &kp K             &kp Y       &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                    &kp G    &c_ced       &kp M        &kp H        &kp V    &kp Z
-                                                       &lt 4 ESC         &lt 2 TAB         &lt 1 SPACE              &kp BSPC &lt 3 RET    &kp DEL
+            &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &kp O             &uc UC_FR_E_ACUTE &kp B            &none &none &kp F    &kp D              &kp L        &QUOT_OPT   &kp Q            &kp X
+            &SLSH_OPT         &hml LGUI A       &hml LALT I &hml LCTRL E      &hml LSHFT U      &COMMA_OPT       &none &none &kp P    &hmr RSHFT T       &hmr RCTRL S &hmr LALT R &lt DIACRITICS N &QMARK_OPT
+            &DASH_OPT         &kp K             &kp Y       &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                        &kp G    &c_ced             &kp M        &kp H       &kp V            &kp Z
+                                                            &lt FUNCTION ESC  &lt GREEK TAB     &lt SYMBOL SPACE             &kp BSPC &lt NAVIGATION RET &kp DEL
             >;
         };
 
@@ -194,10 +204,10 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
             //                   | ESC | TAB | --- |               |BACKS|ENTER| DEL |
 
             bindings = <
-            &none  &kp PRCNT &kp AMPS &kp CARET &kp DLLR &kp LBKT &none  &none  &kp RBKT  &kp N7        &kp N8        &kp N9       &kp HASH &none
-            &none  &SLSH_OPT &kp PLUS  &kp EQUAL &kp STAR &kp LPAR &none  &none  &kp RPAR  &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0   &none
-            &none  &kp AT    &kp LT    &DASH_OPT &kp GT   &kp LBRC               &kp RBRC  &kp N1        &kp N2        &kp N3       &kp DOT  &kp COMMA
-                                       &kp ESC   &kp TAB  &none                  &kp BSPC  &kp RET  &kp DEL
+            &none &kp PRCNT &kp AMPS &kp CARET &kp DLLR &kp LBKT &none &none &kp RBKT &kp N7        &kp N8        &kp N9       &kp HASH &none
+            &none &SLSH_OPT &kp PLUS &kp EQUAL &kp STAR &kp LPAR &none &none &kp RPAR &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0   &none
+            &none &kp AT    &kp LT   &DASH_OPT &kp GT   &kp LBRC             &kp RBRC &kp N1        &kp N2        &kp N3       &kp DOT  &kp COMMA
+                                     &kp ESC   &kp TAB  &none                &kp BSPC &kp RET       &kp DEL
             >;
         };
 
@@ -211,10 +221,10 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
             //                   | ESC | --- |SPACE|               |BSPC |ENTER| DEL |
 
             bindings = <
-            &none         &none           &none          &uc UC_EL_OMIKRON &uc UC_EL_THETA     &uc UC_EL_BETA &none &none &uc UC_EL_PHI   &uc UC_EL_DELTA &uc UC_EL_LAMBDA &none          &none        &uc UC_EL_XI
-            &none         &uc UC_EL_ALPHA &uc UC_EL_IOTA &uc UC_EL_EPSILON &hm_upsilon LSHFT 0 &none          &none &none &uc UC_EL_PI    &hm_tau RSHFT 0 &uc UC_EL_SIGMA  &uc UC_EL_RHO  &uc UC_EL_NU &none
-            &uc UC_EL_PSI &uc UC_EL_KAPPA &none          &none             &none               &uc UC_EL_OMEGA            &uc UC_EL_GAMMA &uc UC_EL_CHI   &uc UC_EL_MU     &uc UC_EL_ETA  &none        &uc UC_EL_ZETA
-                                                         &kp ESC           &none            &kp SPACE                  &kp BSPC         &kp RET  &kp DEL
+            &none         &none           &none          &uc UC_EL_OMIKRON &uc UC_EL_THETA     &uc UC_EL_BETA  &none &none &uc UC_EL_PHI   &uc UC_EL_DELTA &uc UC_EL_LAMBDA &none         &none        &uc UC_EL_XI
+            &none         &uc UC_EL_ALPHA &uc UC_EL_IOTA &uc UC_EL_EPSILON &hm_upsilon LSHFT 0 &none           &none &none &uc UC_EL_PI    &hm_tau RSHFT 0 &uc UC_EL_SIGMA  &uc UC_EL_RHO &uc UC_EL_NU &none
+            &uc UC_EL_PSI &uc UC_EL_KAPPA &none          &none             &none               &uc UC_EL_OMEGA             &uc UC_EL_GAMMA &uc UC_EL_CHI   &uc UC_EL_MU     &uc UC_EL_ETA &none        &uc UC_EL_ZETA
+                                                         &kp ESC           &none               &kp SPACE                   &kp BSPC        &kp RET         &kp DEL
             >;
         };
 
@@ -228,10 +238,10 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
             //                    | ESC | TAB |SPCE|               |BSPC | --- | DEL |
 
             bindings = <
-            &none  &none     &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &none &none  &none  &none      &kp K_UNDO &kp UP     &kp K_REDO  &none       &none
-            &none  &kp LGUI  &kp LALT     &kp LCTRL  &kp LSHFT    &none &none  &none  &kp C_PREV &kp LEFT   &kp DOWN   &kp RIGHT   &kp C_NEXT  &none
-            &none  &none     &kp C_PREV   &kp C_PP   &kp C_NEXT   &none               &none      &kp K_CUT  &kp K_COPY &kp K_PASTE &none       &none
-                             &kp ESC      &kp TAB    &kp SPACE                        &kp BSPC   &none      &kp DEL
+            &none &none    &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &none &none &none &none      &kp K_UNDO &kp UP     &kp K_REDO  &none      &none
+            &none &kp LGUI &kp LALT     &kp LCTRL  &kp LSHFT    &none &none &none &kp C_PREV &kp LEFT   &kp DOWN   &kp RIGHT   &kp C_NEXT &none
+            &none &none    &kp C_PREV   &kp C_PP   &kp C_NEXT   &none            &none      &kp K_CUT  &kp K_COPY &kp K_PASTE &none      &none
+                                        &kp ESC    &kp TAB      &kp SPACE        &kp BSPC   &none      &kp DEL
             >;
         };
 
@@ -245,10 +255,10 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
             //                   | --- | TAB |SPACE|               |BSPCE|ENTER| DEL|
 
             bindings = <
-            &bt BT_CLR      &bt BT_SEL 4 &bt BT_SEL 3 &bt BT_SEL 2 &bt BT_SEL 1 &bt BT_SEL 0 &none  &none  &none  &none  &kp F7 &kp F8  &kp F9  &kp F12
-            &rgb_ug RGB_TOG &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none        &none  &none  &none  &none  &kp F4 &kp F5  &kp F6  &kp F11
-            &none           &none        &none        &none        &none        &none                      &none  &none  &kp F1 &kp F2  &kp F3  &kp F10
-                                                      &none        &kp TAB      &kp SPACE                  &kp BSPC &kp RET  &kp DEL
+            &bt BT_CLR      &bt BT_SEL 4 &bt BT_SEL 3 &bt BT_SEL 2 &bt BT_SEL 1 &bt BT_SEL 0 &none &none &none &none &kp F7 &kp F8 &kp F9 &kp F12
+            &rgb_ug RGB_TOG &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none        &none &none &none &none &kp F4 &kp F5 &kp F6 &kp F11
+            &none           &none        &none        &none        &none        &none                  &none &none &kp F1 &kp F2 &kp F3 &kp F10
+                                                      &none        &kp TAB      &kp SPACE                &kp BSPC &kp RET &kp DEL
             >;
         };
 
@@ -256,16 +266,16 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
             display-name = "hats & dots";
 
             // --------------------------------------------------------------------------------
-            // |BTCLR|BT  5|BT  4|BT  3|BT  2|BT  1|  none |  none |  n  |  n  | F7 | F8 | F9 | F12|
-            // | RGB |SUPER| ALT |CTRL |SHIFT|  n  |  none |  none |  n  |  n  | F4 | F5 | F6 | F11|
-            // |  n  |  n  |  n  |  n  |  n  |  n  |               |  n  |  n  | F1 | F2 | F3 | F10|
-            //                   | --- | TAB |SPACE|               |BSPCE|ENTER| DEL|
+            // |  n  |  n  |  æ  |  ô  |  œ  |  n  |  none |  none |  n  |  n  |  n  |  n  |  n  |  n  |
+            // |  n  |  â  | î/ï | ê/ë | û/ü |  n  |  none |  none |  n  |RSHFT|  n  |RALT |  n  |  n  |
+            // |  n  |  n  | y/ÿ |  n  |  n  |  n  |               |  n  |  n  |  n  |  n  |  n  |  n  |
+            //                   | ESC | TAB |SPACE|               |BSPC |ENTER| DEL |
 
             bindings = <
-            &none &none                  &uc UC_FR_AE &uc UC_FR_O_CIRCUMFLEX &uc UC_FR_OE &none &none  &none  &none  &none     &none &none    &none  &none
-            &none &uc UC_FR_A_CIRCUMFLEX &i_hat       &e_hat                 &u_hat       &none &none  &none  &none  &kp RSHFT &none &kp RALT &none  &none
-            &none &none                  &y_trema     &none                  &none        &none               &none  &none     &none &none    &none  &none
-                   &kp ESC  &kp TAB      &kp SPACE                  &kp BSPC &kp RET  &kp DEL
+            &none &none                  &uc UC_FR_AE &uc UC_FR_O_CIRCUMFLEX &uc UC_FR_OE &none &none &none &none &none     &none &none    &none &none
+            &none &uc UC_FR_A_CIRCUMFLEX &i_hat       &e_hat                 &u_hat       &none &none &none &none &kp RSHFT &none &kp RALT &none &none
+            &none &none                  &y_trema     &none                  &none        &none            &none &none     &none &none    &none &none
+                                                      &kp ESC                &kp TAB      &kp SPACE          &kp BSPC &kp RET   &kp DEL
             >;
         };
 
