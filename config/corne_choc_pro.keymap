@@ -369,16 +369,22 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
             display-name = "<^>";
 
             // --------------------------------------------------------------------------------
-            // |  n  |  n  |snd -|snd x|snd +|  n  |  none |  none |  n  |undo |  ^  |redo |  n  |  n  |
-            // |  n  |SUPER| ALT |CTRL |SHIFT|  n  |  none |  none | prev|  <  | dwn |  >  |next |  n  |
-            // |  n  |  n  |prev | ||> |next |  n  |               |  n  | cut |copy |paste|  n  |  n  |
+            // |  n  |  n  |snd -|snd x|snd +|paste|  none |  none |  n   |PgDn |  ^  |PgUp |  n  |  n  |
+            // |  n  |SUPER| ALT |CTRL |SHIFT| cut |  none |  none | home |  <  | dwn |  >  | end |  n  |
+            // |  n  |  n  |prev | ||> |next | copy|               |  n   |undo |  n  |redo |  n  |  n  |
             //                    | ESC | TAB |SPCE|               |BSPC | --- | DEL |
+            //
+            // undo/redo/cut/copy/paste are sent as literal keyboard shortcuts
+            // (Ctrl+Z/Y/X/C/V) rather than HID consumer "AC_*" codes, since most
+            // apps (and Linux especially) only listen for the former. snd-/x/+ and
+            // prev/||>/next stay as real consumer media keys, which are universally
+            // supported.
 
             bindings = <
-            &none &none    &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &none &none &none &none      &kp K_UNDO &kp UP     &kp K_REDO  &none      &none
-            &none &kp LGUI &kp LALT     &kp LCTRL  &kp LSHFT    &none &none &none &kp C_PREV &kp LEFT   &kp DOWN   &kp RIGHT   &kp C_NEXT &none
-            &none &none    &kp C_PREV   &kp C_PP   &kp C_NEXT   &none            &none      &kp K_CUT  &kp K_COPY &kp K_PASTE &none      &none
-                                        &kp ESC    &kp TAB      &kp SPACE        &kp BSPC   &none      &kp DEL
+            &none &none    &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &kp LC(V) &none &none &none    &kp PG_DN &kp UP   &kp PG_UP &none   &none
+            &none &kp LGUI &kp LALT     &kp LCTRL  &kp LSHFT    &kp LC(X) &none &none &kp HOME &kp LEFT  &kp DOWN &kp RIGHT &kp END &none
+            &none &none    &kp C_PREV   &kp C_PP   &kp C_NEXT   &kp LC(C)             &none    &kp LC(Z) &none    &kp LC(Y) &none   &none
+                                        &kp ESC    &kp TAB      &kp SPACE             &kp BSPC &none     &kp DEL
             >;
         };
 
@@ -392,9 +398,9 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
             //                   | --- | TAB |SPACE|               |BSPCE|ENTER| DEL|
 
             bindings = <
-            &bt BT_CLR      &bt BT_SEL 4 &bt BT_SEL 3 &bt BT_SEL 2 &bt BT_SEL 1 &bt BT_SEL 0 &none &none &none &none &kp F7 &kp F8 &kp F9 &kp F12
-            &rgb_ug RGB_TOG &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none        &none &none &none &none &kp F4 &kp F5 &kp F6 &kp F11
-            &none           &none        &none        &none        &none        &none                  &none &none &kp F1 &kp F2 &kp F3 &kp F10
+            &bt BT_CLR      &bt BT_SEL 4 &bt BT_SEL 3 &bt BT_SEL 2 &bt BT_SEL 1 &bt BT_SEL 0 &none &none &none    &none   &kp F7  &kp F8 &kp F9 &kp F12
+            &rgb_ug RGB_TOG &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none        &none &none &none    &none   &kp F4  &kp F5 &kp F6 &kp F11
+            &none           &none        &none        &none        &none        &none                    &none    &none   &kp F1  &kp F2 &kp F3 &kp F10
                                                       &none        &kp TAB      &kp SPACE                &kp BSPC &kp RET &kp DEL
             >;
         };
@@ -409,10 +415,10 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
             //                   | ESC | TAB |SPACE|               |BSPC |ENTER| DEL |
 
             bindings = <
-            &none &none                  &uc UC_FR_AE &uc UC_FR_O_CIRCUMFLEX &uc UC_FR_OE &none &none &none &none &none     &none &none    &none &none
-            &none &uc UC_FR_A_CIRCUMFLEX &i_hat       &e_hat                 &u_hat       &none &none &none &none &kp RSHFT &none &kp RALT &none &none
-            &none &none                  &y_trema     &none                  &none        &none            &none &none     &none &none    &none &none
-                                                      &kp ESC                &kp TAB      &kp SPACE          &kp BSPC &kp RET   &kp DEL
+            &none &none                  &uc UC_FR_AE &uc UC_FR_O_CIRCUMFLEX &uc UC_FR_OE &none     &none &none &none    &none     &none   &none    &none &none
+            &none &uc UC_FR_A_CIRCUMFLEX &i_hat       &e_hat                 &u_hat       &none     &none &none &none    &kp RSHFT &none   &kp RALT &none &none
+            &none &none                  &y_trema     &none                  &none        &none                 &none    &none     &none   &none    &none &none
+                                                      &kp ESC                &kp TAB      &kp SPACE             &kp BSPC &kp RET   &kp DEL
             >;
         };
 
