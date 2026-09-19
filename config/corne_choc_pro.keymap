@@ -143,6 +143,48 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
             bindings = <&kp Y>, <&uc UC_FR_Y_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
+        theta_var: theta_var {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_EL_THETA>, <&uc UC_EL_THETA_SYM>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        phi_var: phi_var {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_EL_PHI>, <&uc UC_EL_PHI_SYM>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        epsilon_var: epsilon_var {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_EL_EPSILON>, <&uc UC_EL_EPSILON_SYM>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        kappa_var: kappa_var {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_EL_KAPPA>, <&uc UC_EL_KAPPA_SYM>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        pi_var: pi_var {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_EL_PI>, <&uc UC_EL_PI_SYM>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        rho_var: rho_var {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_EL_RHO>, <&uc UC_EL_RHO_SYM>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        sigma_var: sigma_var {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_EL_SIGMA>, <&uc UC_EL_FINAL_SIGMA>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
     };
 };
 ZMK_BEHAVIOR(uc_upsilon, macro,
@@ -236,9 +278,9 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
             //                   | ESC | --- |SPACE|               |BSPC |ENTER| DEL |
 
             bindings = <
-            &none         &none           &none          &uc UC_EL_OMIKRON &uc UC_EL_THETA     &uc UC_EL_BETA  &none &none &uc UC_EL_PHI   &uc UC_EL_DELTA &uc UC_EL_LAMBDA &none         &none        &uc UC_EL_XI
-            &none         &uc UC_EL_ALPHA &uc UC_EL_IOTA &uc UC_EL_EPSILON &hm_upsilon LSHFT 0 &none           &none &none &uc UC_EL_PI    &hm_tau RSHFT 0 &uc UC_EL_SIGMA  &uc UC_EL_RHO &uc UC_EL_NU &none
-            &uc UC_EL_PSI &uc UC_EL_KAPPA &none          &none             &none               &uc UC_EL_OMEGA             &uc UC_EL_GAMMA &uc UC_EL_CHI   &uc UC_EL_MU     &uc UC_EL_ETA &none        &uc UC_EL_ZETA
+            &none         &none           &none          &uc UC_EL_OMIKRON &theta_var          &uc UC_EL_BETA  &none &none &phi_var        &uc UC_EL_DELTA &uc UC_EL_LAMBDA &none         &none        &uc UC_EL_XI
+            &none         &uc UC_EL_ALPHA &uc UC_EL_IOTA &epsilon_var      &hm_upsilon LSHFT 0 &none           &none &none &pi_var         &hm_tau RSHFT 0 &sigma_var       &rho_var      &uc UC_EL_NU &none
+            &uc UC_EL_PSI &kappa_var      &none          &none             &none               &uc UC_EL_OMEGA             &uc UC_EL_GAMMA &uc UC_EL_CHI   &uc UC_EL_MU     &uc UC_EL_ETA &none        &uc UC_EL_ZETA
                                                          &kp ESC           &none               &kp SPACE                   &kp BSPC        &kp RET         &kp DEL
             >;
         };
