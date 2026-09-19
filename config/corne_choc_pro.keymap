@@ -91,6 +91,62 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
+
+// <⟨«
+// tap: < alt + tap: ⟨ (base for nesting)
+ZMK_BEHAVIOR(LTANGLE, mod_morph,
+    bindings = <&kp LT>, <&uc UC_MATHEMATICAL_LEFT_ANGLE_BRACKET>;
+    mods = <(MOD_LALT|MOD_RALT)>;
+)
+// tap: < (or ⟨ on alt) | shift + tap: «
+ZMK_BEHAVIOR(LT_OPT, mod_morph,
+    bindings = <&LTANGLE>, <&uc UC_LEFT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+// >⟩»
+// tap: > alt + tap: ⟩ (base for nesting)
+ZMK_BEHAVIOR(GTANGLE, mod_morph,
+    bindings = <&kp GT>, <&uc UC_MATHEMATICAL_RIGHT_ANGLE_BRACKET>;
+    mods = <(MOD_LALT|MOD_RALT)>;
+)
+// tap: > (or ⟩ on alt) | shift + tap: »
+ZMK_BEHAVIOR(GT_OPT, mod_morph,
+    bindings = <&GTANGLE>, <&uc UC_RIGHT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+// *×†
+// tap: * alt + tap: × (base for nesting)
+ZMK_BEHAVIOR(STARTIMES, mod_morph,
+    bindings = <&kp STAR>, <&uc UC_MULTIPLICATION_SIGN>;
+    mods = <(MOD_LALT|MOD_RALT)>;
+)
+// tap: * (or × on alt) | shift + tap: † (dagger)
+ZMK_BEHAVIOR(STAR_OPT, mod_morph,
+    bindings = <&STARTIMES>, <&uc UC_DAGGER>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+// +±
+// tap: + | shift + tap: ±
+ZMK_BEHAVIOR(PLUS_OPT, mod_morph,
+    bindings = <&kp PLUS>, <&uc UC_PLUS_MINUS_SIGN>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+// =≠≈
+// tap: = alt + tap: ≈ (base for nesting)
+ZMK_BEHAVIOR(EQUALAPPROX, mod_morph,
+    bindings = <&kp EQUAL>, <&uc UC_ALMOST_EQUAL_TO>;
+    mods = <(MOD_LALT|MOD_RALT)>;
+)
+// tap: = (or ≈ on alt) | shift + tap: ≠
+ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
+    bindings = <&EQUALAPPROX>, <&uc UC_NOT_EQUAL_TO>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
 / {
     behaviors {
         hml: home_row_mod_left {
@@ -279,16 +335,16 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
             display-name = "SYMBOL";
 
             // --------------------------------------------------------------------------------
-            // |  n  |  %  |  &  |  ^  |  $  |  [  |  none |  none |  ]  |  7  |  8  |  9  |  #  |  n  |
-            // |  n  | /\| |  +  |  =  |  *  |  (  |  none |  none |  )  |  4  |  5  |  6  |  0  |  n  |
-            // |  n  |  @  |  <  | -_~ |  >  |  {  |               |  }  |  1  |  2  |  3  |  .  |  ,  |
-            //                   | ESC | TAB | --- |               |BACKS|ENTER| DEL |
+            // |  n  |  %  |  &  |  ^    |  $   |  [   |  none |  none |  ]  |  7  |  8  |  9  |  #  |  n  |
+            // | /\| |  √  | +±  | =≠≈   | *×†  |  (   |  none |  none |  )  |  4  |  5  |  6  |  0  |  n  |
+            // |  n  |  @  | <⟨« | -_~   | >⟩»  |  {   |               |  }  |  1  |  2  |  3  |  .  |  ,  |
+            //                   | ESC   | TAB  |SPACE |               | --- |ENTER| DEL |
 
             bindings = <
-            &none &kp PRCNT &kp AMPS &kp CARET &kp DLLR &kp LBKT &none &none &kp RBKT &kp N7        &kp N8        &kp N9       &kp HASH &none
-            &none &SLSH_OPT &kp PLUS &kp EQUAL &kp STAR &kp LPAR &none &none &kp RPAR &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0   &none
-            &none &kp AT    &kp LT   &DASH_OPT &kp GT   &kp LBRC             &kp RBRC &kp N1        &kp N2        &kp N3       &kp DOT  &kp COMMA
-                                     &kp ESC   &kp TAB  &none                &kp BSPC &kp RET       &kp DEL
+            &none     &kp PRCNT          &kp AMPS  &kp CARET  &kp DLLR  &kp LBKT &none &none &kp RBKT &kp N7        &kp N8        &kp N9       &kp HASH &none
+            &SLSH_OPT &uc UC_SQUARE_ROOT &PLUS_OPT &EQUAL_OPT &STAR_OPT &kp LPAR &none &none &kp RPAR &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0   &none
+            &none     &kp AT             &LT_OPT   &DASH_OPT  &GT_OPT   &kp LBRC             &kp RBRC &kp N1        &kp N2        &kp N3       &kp DOT  &kp COMMA
+                                                   &kp ESC    &kp TAB   &kp SPACE            &none    &kp RET       &kp DEL
             >;
         };
 
