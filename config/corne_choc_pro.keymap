@@ -171,6 +171,21 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
     hold-trigger-on-release;
 )
 
+// Hold both home-row shift mods (U left / T right) together to toggle caps word.
+// Short timeout + a prior-idle requirement keep it from misfiring during normal typing.
+/ {
+    combos {
+        compatible = "zmk,combos";
+        combo_caps_word {
+            timeout-ms = <50>;
+            require-prior-idle-ms = <150>;
+            key-positions = <18 23>;
+            bindings = <&caps_word>;
+            layers = <DEFAULT>;
+        };
+    };
+};
+
 
 / {
 
@@ -187,10 +202,10 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
             //                    | ESC | TAB |SPACE|               |BACKS|ENTER| DEL |
 
             bindings = <
-            &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &kp O             &uc UC_FR_E_ACUTE &kp B            &none &none &kp F    &kp D              &kp L        &QUOT_OPT   &kp Q            &kp X
-            &SLSH_OPT         &hml LGUI A       &hml LALT I &hml LCTRL E      &hml LSHFT U      &COMMA_OPT       &none &none &kp P    &hmr RSHFT T       &hmr RCTRL S &hmr LALT R &lt DIACRITICS N &QMARK_OPT
-            &DASH_OPT         &kp K             &kp Y       &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                        &kp G    &c_ced             &kp M        &kp H       &kp V            &kp Z
-                                                            &lt FUNCTION ESC  &lt GREEK TAB     &lt SYMBOL SPACE             &kp BSPC &lt NAVIGATION RET &kp DEL
+            &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &kp O             &uc UC_FR_E_ACUTE &kp B      &none &none &kp F           &kp D              &kp L        &QUOT_OPT   &kp Q            &kp X
+            &SLSH_OPT         &hml LGUI A       &hml LALT I &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none &none &kp P           &hmr RSHFT T       &hmr RCTRL S &hmr LALT R &lt DIACRITICS N &QMARK_OPT
+            &DASH_OPT         &kp K             &kp Y       &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                  &kp G           &c_ced             &kp M        &kp H       &kp V            &kp Z
+                                                            &lt FUNCTION ESC  &lt GREEK TAB     &kp SPACE              &lt SYMBOL BSPC &lt NAVIGATION RET &kp DEL
             >;
         };
 
