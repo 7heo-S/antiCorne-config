@@ -163,8 +163,33 @@ ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
 #define UC_COMB_MACRON     0x0304 0x0304 // ◌̄
 #define UC_COMB_CEDILLA    0x0327 0x0327 // ◌̧
 #define UC_COMB_CARON      0x030C 0x030C // ◌̌
-#define UC_COMB_RING       0x030A 0x030A // ◌̊
 #define UC_COMB_DOT_ABOVE  0x0307 0x0307 // ◌̇
+
+// Precomposed circumflex letters beyond the French vowels (already covered by
+// zmk-unicode's UC_FR_{A,E,I,O,U}_CIRCUMFLEX): Esperanto's full circumflexed
+// consonant set plus Welsh/Bantu-transliteration ones. Verified against
+// Python's unicodedata — of the 26 Latin letters, only these 13 (plus AEIOU)
+// have a precomposed circumflex codepoint at all; the rest have none, which
+// is the whole reason the ACCENT layer's combining-mark keys exist.
+#define UC_G_CIRCUMFLEX 0x011D 0x011C // ĝ/Ĝ
+#define UC_H_CIRCUMFLEX 0x0125 0x0124 // ĥ/Ĥ
+#define UC_J_CIRCUMFLEX 0x0135 0x0134 // ĵ/Ĵ
+#define UC_S_CIRCUMFLEX 0x015D 0x015C // ŝ/Ŝ
+#define UC_W_CIRCUMFLEX 0x0175 0x0174 // ŵ/Ŵ
+#define UC_Y_CIRCUMFLEX 0x0177 0x0176 // ŷ/Ŷ
+#define UC_Z_CIRCUMFLEX 0x1E91 0x1E90 // ẑ/Ẑ
+
+// Precomposed diaeresis letters not covered by zmk-unicode's french.h (which
+// only defines the ones French actually uses: E/I/U/Y). A and O have no
+// French use either but do have Unicode codepoints (ä, ö); H and W are
+// transliteration letters. Of the 12 ACCENT-layer circumflex letters, only
+// these 4 plus E/I/U/Y (already in french.h) have a diaeresis counterpart --
+// G/J/S/Z don't have one in Unicode at all, same story as the circumflex
+// gaps above.
+#define UC_A_DIAERESIS 0x00E4 0x00C4 // ä/Ä
+#define UC_H_DIAERESIS 0x1E27 0x1E26 // ḧ/Ḧ
+#define UC_O_DIAERESIS 0x00F6 0x00D6 // ö/Ö
+#define UC_W_DIAERESIS 0x1E85 0x1E84 // ẅ/Ẅ
 
 / {
     behaviors {
@@ -218,6 +243,36 @@ ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
             bindings = <&kp Y>, <&uc UC_FR_Y_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
+        a_hat: a_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_FR_A_CIRCUMFLEX>, <&uc UC_A_DIAERESIS>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        o_hat: o_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_FR_O_CIRCUMFLEX>, <&uc UC_O_DIAERESIS>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        h_hat: h_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_H_CIRCUMFLEX>, <&uc UC_H_DIAERESIS>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        w_hat: w_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_W_CIRCUMFLEX>, <&uc UC_W_DIAERESIS>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        y_hat: y_hat {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_Y_CIRCUMFLEX>, <&uc UC_FR_Y_DIAERESIS>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
         theta_var: theta_var {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -260,35 +315,23 @@ ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
             bindings = <&uc UC_EL_SIGMA>, <&uc UC_EL_FINAL_SIGMA>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
-        acc_circumflex: acc_circumflex {
+        acc_circumflex_caron: acc_circumflex_caron {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_COMB_CIRCUMFLEX>, <&uc UC_COMB_DIAERESIS>;
-            mods = <(MOD_LALT|MOD_RALT)>;
+            bindings = <&uc UC_COMB_CIRCUMFLEX>, <&uc UC_COMB_CARON>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        acc_grave: acc_grave {
+        acc_macron_tilde: acc_macron_tilde {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_COMB_GRAVE>, <&uc UC_COMB_ACUTE>;
-            mods = <(MOD_LALT|MOD_RALT)>;
+            bindings = <&uc UC_COMB_MACRON>, <&uc UC_COMB_TILDE>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        acc_tilde: acc_tilde {
+        acc_dot_diaeresis: acc_dot_diaeresis {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_COMB_TILDE>, <&uc UC_COMB_MACRON>;
-            mods = <(MOD_LALT|MOD_RALT)>;
-        };
-        acc_cedilla: acc_cedilla {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&uc UC_COMB_CEDILLA>, <&uc UC_COMB_CARON>;
-            mods = <(MOD_LALT|MOD_RALT)>;
-        };
-        acc_ring: acc_ring {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&uc UC_COMB_RING>, <&uc UC_COMB_DOT_ABOVE>;
-            mods = <(MOD_LALT|MOD_RALT)>;
+            bindings = <&uc UC_COMB_DOT_ABOVE>, <&uc UC_COMB_DIAERESIS>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };
 };
@@ -344,6 +387,15 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
 
 // Hold both home-row shift mods (U left / T right) together to toggle caps word.
 // Short timeout + a prior-idle requirement keep it from misfiring during normal typing.
+//
+// ae/oe ligature combos: A+E and O+E, the literal component letters. These
+// two are French-useful but don't conceptually belong on an "accent" layer,
+// so they get their own combo instead, independent of whether the Diacritics
+// layer (their current home) sticks around. A+E are two columns apart on the
+// home row (different fingers, same shape as the combo above); O+E share a
+// column (same finger, different row), which is a physically awkward
+// simultaneous press, hence the longer timeout below to give that roll more
+// slack.
 / {
     combos {
         compatible = "zmk,combos";
@@ -352,6 +404,20 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
             require-prior-idle-ms = <150>;
             key-positions = <18 23>;
             bindings = <&caps_word>;
+            layers = <DEFAULT>;
+        };
+        combo_ae {
+            timeout-ms = <50>;
+            require-prior-idle-ms = <150>;
+            key-positions = <15 17>;
+            bindings = <&uc UC_FR_AE>;
+            layers = <DEFAULT>;
+        };
+        combo_oe {
+            timeout-ms = <80>;
+            require-prior-idle-ms = <150>;
+            key-positions = <3 17>;
+            bindings = <&uc UC_FR_OE>;
             layers = <DEFAULT>;
         };
     };
@@ -384,16 +450,19 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
             display-name = "SYMBOL";
 
             // --------------------------------------------------------------------------------
-            // |  n  |  %  |  &  |  ^    |  $   |  [   |  none |  none |  ]  |  7  |  8  |  9  |  #  |  n  |
+            // |  n  |  %  |  &  |  $    |  ^   |  [   |  none |  none |  ]  |  7  |  8  |  9  |  #  |  n  |
             // | /\| |  √  | +±  | =≠≈   | *×†  |  (   |  none |  none |  )  |  4  |  5  |  6  |  0  |  n  |
             // |  n  |  @  | <⟨« | -_~   | >⟩»  |  {   |               |  }  |  1  |  2  |  3  |  .  |  ,  |
             //                   | ESC   | TAB  |SPACE |               | --- |ENTER| DEL |
+            //
+            // ^ (exponent/caret) swapped onto the $ key's old spot -- same physical
+            // position as the Accent layer's circumflex, on the "e acute" key.
 
             bindings = <
-            &none     &kp PRCNT          &kp AMPS  &kp CARET  &kp DLLR  &kp LBKT &none &none &kp RBKT &kp N7        &kp N8        &kp N9       &kp HASH &none
-            &SLSH_OPT &uc UC_SQUARE_ROOT &PLUS_OPT &EQUAL_OPT &STAR_OPT &kp LPAR &none &none &kp RPAR &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0   &none
-            &none     &kp AT             &LT_OPT   &DASH_OPT  &GT_OPT   &kp LBRC             &kp RBRC &kp N1        &kp N2        &kp N3       &kp DOT  &kp COMMA
-                                                   &kp ESC    &kp TAB   &kp SPACE            &none    &kp RET       &kp DEL
+            &none     &kp PRCNT          &kp AMPS  &kp DLLR   &kp CARET &kp LBKT  &none &none &kp RBKT &kp N7        &kp N8        &kp N9       &kp HASH &none
+            &SLSH_OPT &uc UC_SQUARE_ROOT &PLUS_OPT &EQUAL_OPT &STAR_OPT &kp LPAR  &none &none &kp RPAR &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &kp N0   &none
+            &none     &kp AT             &LT_OPT   &DASH_OPT  &GT_OPT   &kp LBRC              &kp RBRC &kp N1        &kp N2        &kp N3       &kp DOT  &kp COMMA
+                                                   &kp ESC    &kp TAB   &kp SPACE             &none    &kp RET       &kp DEL
             >;
         };
 
@@ -474,24 +543,35 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
         accent_layer {
             display-name = "ACCENT";
 
-            // Trial layer: type a base letter normally, then hold Del (right thumb) and
-            // tap one of these to append a *combining* diacritic (U+0300 block) onto it,
-            // e.g. n + this circumflex key -> n̂ (n-circumflex), which has no
-            // precomposed Unicode codepoint and so isn't reachable any other way here.
-            // Unlike the Diacritics layer, this works on any letter, not just the French
-            // ones. If it earns its keep, it can replace the N-key Diacritics layer.
+            // Type a base letter normally, then hold Del (right thumb) and tap one of
+            // these. Two ways to compose an accent:
+            //  - Letter positions (J/O/é/A/I/E/U/S/Y/W/G/H/Z) give the single precomposed
+            //    Unicode character directly (â, ĵ, ŷ...) -- only the 13 Latin letters that
+            //    actually have one exist here (verified against unicodedata); the other 13
+            //    have no precomposed circumflex form in Unicode, full stop. 8 of these 12
+            //    (A/E/H/I/O/U/W/Y) also have a precomposed diaeresis, so those are alt-tap
+            //    mod-morphs (tap circumflex, alt diaeresis) instead of plain keys, same
+            //    pattern as e_hat/i_hat/u_hat on the Diacritics layer -- in fact E/I/U here
+            //    just reuse those exact behaviors. G/J/S/Z have no diaeresis codepoint
+            //    either, so they stay plain circumflex-only.
+            //  - The 6 remaining keys are combining marks (U+0300 block) that fuse onto
+            //    whatever letter you just typed, so they work on literally any letter,
+            //    including the 13 with no precomposed circumflex, e.g. n + circumflex(é
+            //    position) -> n̂. Not in zmk-unicode's generated headers, so defined by
+            //    hand as raw codepoints.
+            // If it earns its keep over the N-key Diacritics layer, that one may retire.
             //
             // --------------------------------------------------------------------------------
-            // |  n  |  n  |  n  |  n  |  n  |  n  |  none |  none |  n  |  n  |  n  |  n  |  n  |  n  |
-            // |  n  |  n  | ^/¨ | `/´ | ~/¯ |  n  |  none |  none |  n  | ¸/ˇ | ˚/˙ |  n  |  n  |  n  |
-            // |  n  |  n  |  n  |  n  |  n  |  n  |               |  n  |  n  |  n  |  n  |  n  |  n  |
-            //                   | ESC | TAB |SPACE|               |BSPC |ENTER| --- |
+            // |  n  |  n   |  ĵ  | ô/ö | ^/ˇ  |  n  |  none |  none |  n  |  n  |  n  |  `  |  n  |  n  |
+            // |  n  | â/ä  | î/ï | ê/ë | û/ü  |  ´  |  none |  none |  n  |  n  | ŝ   |  n  |  n  |  n  |
+            // | ¯/~ |  n   | ŷ/ÿ |  n  | ˙/¨  | ŵ/ẅ |               | ĝ   |  ¸  |  n  | ĥ/ḧ |  n  |  ẑ  |
+            //                    | ESC | TAB  |SPACE|               |BSPC |ENTER| --- |
 
             bindings = <
-            &none &none &none           &none      &none      &none     &none &none &none    &none        &none     &none &none &none
-            &none &none &acc_circumflex &acc_grave &acc_tilde &none     &none &none &none    &acc_cedilla &acc_ring &none &none &none
-            &none &none &none           &none      &none      &none                 &none    &none        &none     &none &none &none
-                                        &kp ESC    &kp TAB    &kp SPACE             &kp BSPC &kp RET      &none
+            &none             &none  &uc UC_J_CIRCUMFLEX &o_hat  &acc_circumflex_caron &none             &none &none &none               &none               &none               &uc UC_COMB_GRAVE &none &none
+            &none             &a_hat &i_hat              &e_hat  &u_hat                &uc UC_COMB_ACUTE &none &none &none               &none               &uc UC_S_CIRCUMFLEX &none             &none &none
+            &acc_macron_tilde &none  &y_hat              &none   &acc_dot_diaeresis    &w_hat                        &uc UC_G_CIRCUMFLEX &uc UC_COMB_CEDILLA &none               &h_hat            &none &uc UC_Z_CIRCUMFLEX
+                                                         &kp ESC &kp TAB               &kp SPACE                     &kp BSPC            &kp RET             &none
             >;
         };
 
