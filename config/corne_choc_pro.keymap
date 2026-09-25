@@ -385,6 +385,30 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
     hold-trigger-on-release;
 )
 
+// Shift/Alt home-row mods for the ACCENT layer, same U/T (shift) and I/R (alt)
+// physical positions as the default and Greek layers, so Shift is reachable to
+// get the caron/tilde/diaeresis shift-variants and uppercase letter forms, and
+// Alt (redundantly, but consistently) to chord from either hand. U and I keep
+// their existing u_hat/i_hat tap behavior; T and R had nothing bound there, so
+// they're plain modifier keys, no hold-tap needed.
+ZMK_BEHAVIOR(acc_hm_u, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <140>;
+    quick-tap-ms = <100>;
+    bindings = <&kp>, <&u_hat>;
+    hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 37 38 39>;
+    hold-trigger-on-release;
+)
+
+ZMK_BEHAVIOR(acc_hm_i, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <140>;
+    quick-tap-ms = <100>;
+    bindings = <&kp>, <&i_hat>;
+    hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 37 38 39>;
+    hold-trigger-on-release;
+)
+
 // Hold both home-row shift mods (U left / T right) together to toggle caps word.
 // Short timeout + a prior-idle requirement keep it from misfiring during normal typing.
 //
@@ -561,17 +585,24 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
             //    hand as raw codepoints.
             // If it earns its keep over the N-key Diacritics layer, that one may retire.
             //
+            // U/T hold Shift (left/right) and I/R hold Alt (left/right) -- same physical
+            // spots as the default and Greek layers -- so Shift is actually reachable here
+            // to get the caron/tilde/diaeresis shift-variants above and uppercase letters
+            // (the &uc behavior itself picks upper/lowercase off currently-held Shift).
+            // U and I keep their tap output (u_hat/i_hat); T and R had nothing bound, so
+            // they're plain modifier keys.
+            //
             // --------------------------------------------------------------------------------
             // |  n  |  n   |  ĵ  | ô/ö | ^/ˇ  |  n  |  none |  none |  n  |  n  |  n  |  `  |  n  |  n  |
-            // |  n  | â/ä  | î/ï | ê/ë | û/ü  |  ´  |  none |  none |  n  |  n  | ŝ   |  n  |  n  |  n  |
+            // |  n  |  â/ä | î/ï⌥| ê/ë |û/ü⇧  |  ´  |  none |  none |  n  |  ⇧  | ŝ   |  ⌥  |  n  |  n  |
             // | ¯/~ |  n   | ŷ/ÿ |  n  | ˙/¨  | ŵ/ẅ |               | ĝ   |  ¸  |  n  | ĥ/ḧ |  n  |  ẑ  |
             //                    | ESC | TAB  |SPACE|               |BSPC |ENTER| --- |
 
             bindings = <
-            &none             &none  &uc UC_J_CIRCUMFLEX &o_hat  &acc_circumflex_caron &none             &none &none &none               &none               &none               &uc UC_COMB_GRAVE &none &none
-            &none             &a_hat &i_hat              &e_hat  &u_hat                &uc UC_COMB_ACUTE &none &none &none               &none               &uc UC_S_CIRCUMFLEX &none             &none &none
-            &acc_macron_tilde &none  &y_hat              &none   &acc_dot_diaeresis    &w_hat                        &uc UC_G_CIRCUMFLEX &uc UC_COMB_CEDILLA &none               &h_hat            &none &uc UC_Z_CIRCUMFLEX
-                                                         &kp ESC &kp TAB               &kp SPACE                     &kp BSPC            &kp RET             &none
+            &none             &none             &uc UC_J_CIRCUMFLEX &o_hat  &acc_circumflex_caron &none             &none &none &none               &none               &none               &uc UC_COMB_GRAVE &none &none
+            &none             &acc_hm_u LSHFT 0 &acc_hm_i LALT 0    &e_hat  &u_hat                &uc UC_COMB_ACUTE &none &none &none               &kp RSHFT           &uc UC_S_CIRCUMFLEX &kp RALT          &none &none
+            &acc_macron_tilde &none             &y_hat              &none   &acc_dot_diaeresis    &w_hat                        &uc UC_G_CIRCUMFLEX &uc UC_COMB_CEDILLA &none               &h_hat            &none &uc UC_Z_CIRCUMFLEX
+                                                                    &kp ESC &kp TAB               &kp SPACE                     &kp BSPC            &kp RET             &none
             >;
         };
 
