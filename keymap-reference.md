@@ -1,6 +1,6 @@
 # antiCorne keymap reference
 
-Corne Choc Pro, 6 layers. Generated from `config/corne_choc_pro.keymap`.
+Corne Choc Pro, 7 layers. Generated from `config/corne_choc_pro.keymap`.
 
 ## Notation
 
@@ -21,6 +21,7 @@ Corne Choc Pro, 6 layers. Generated from `config/corne_choc_pro.keymap`.
 | `Bspc` (right thumb) | SYMBOL |
 | `Enter` (right thumb) | NAVIGATION |
 | `N` (right pinky, home row) | DIACRITICS |
+| `Del` (right thumb) | ACCENT *(trial — see Layer 6)* |
 
 **Caps Word combo:** hold **U** (left) + **T** (right) together → toggles Caps Word (auto-releases at the next word break). Default layer only.
 
@@ -34,7 +35,7 @@ Corne Choc Pro, 6 layers. Generated from `config/corne_choc_pro.keymap`.
 | **/**<br>⌥`&#124;` ⇧`\` | **A**<br>⌘ | **I**<br>⌥ | **E**<br>⌃ | **U**<br>⇧ | **,**<br>⇧`;` | | | **P** | **T**<br>⇧ | **S**<br>⌃ | **R**<br>⌥ | **N**<br>→DIAC | **?**<br>⇧`!` |
 | **-**<br>⌥`~` ⇧`_` | **K** | **Y** | **è** | **.**<br>⇧`:` | **W** | | | **G** | **ç**<br>(⌥`C`) | **M** | **H** | **V** | **Z** |
 
-Thumbs: **Esc**→FUNC · **Tab**→GREEK · **Space** — **Bspc**→SYMBOL · **Enter**→NAV · **Del**
+Thumbs: **Esc**→FUNC · **Tab**→GREEK · **Space** — **Bspc**→SYMBOL · **Enter**→NAV · **Del**→ACCENT
 
 `A`/`I`/`E`/`U` (left) and `T`/`S`/`R` (right) are home-row mods: hold for the modifier shown, tap for the letter.
 
@@ -110,6 +111,30 @@ Held with the `N` key (right pinky, home row on the default layer). `RShift`/`RA
 
 ---
 
+## Layer 6 — Accent *(trial)*
+
+| | | | | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| — | — | — | — | — | — | | | — | — | — | — | — | — |
+| — | — | **^**<br>⌥`¨` | **&#96;**<br>⌥`´` | **~**<br>⌥`¯` | — | | | — | **¸**<br>⌥`ˇ` | **˚**<br>⌥`˙` | — | — | — |
+| — | — | — | — | — | — | | | — | — | — | — | — | — |
+
+Thumbs: **Esc** · **Tab** · **Space** — **Bspc** · **Enter** · —
+
+Held with **Del** (right thumb — see note above). Type the base letter **first**, then hold Del and tap one of these. Unlike every other accent key in this file, these send a *combining* Unicode mark (U+0300 block) rather than a replacement letter — it visually fuses onto whatever you just typed, so it works on **any** letter, not just the ones with a precomposed accented form (e.g. `n` + circumflex → n̂, which has no other way to type here). Cells above show the plain "spacing" form of each mark for legibility; what's actually sent is the combining version.
+
+| Key | Tap | Alt+tap |
+|---|---|---|
+| circumflex/diaeresis | combining circumflex | combining diaeresis |
+| grave/acute | combining grave | combining acute |
+| tilde/macron | combining tilde | combining macron |
+| cedilla/caron | combining cedilla | combining caron |
+| ring/dot above | combining ring above | combining dot above |
+
+This is a trial to replace the Diacritics layer above (arguably breaks home-row symmetry by living on the `N` key) — if it earns its keep, Diacritics may retire.
+
+---
+
 ## Quick index — "where's that character?"
 
 ### French accents
@@ -150,3 +175,6 @@ All on the **Greek layer**. Base forms are plain taps; θ, φ, ε, κ, π, ρ, �
 
 ### Editing / navigation (Navigation layer)
 Undo `⌃Z` · Redo `⌃Y` · Cut `⌃X` · Copy `⌃C` · Paste `⌃V` · Home · End · Page Up · Page Down · arrow keys · media transport (volume/mute/play-pause/track skip)
+
+### Any letter + an accent (Accent layer, trial)
+Hold **Del**, tap one of: circumflex/diaeresis · grave/acute · tilde/macron · cedilla/caron · ring/dot-above. Works after *any* letter, including combinations with no precomposed Unicode form (n̂, ǧ, ȭ...). Type the letter first, accent second.

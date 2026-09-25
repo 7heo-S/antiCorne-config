@@ -23,6 +23,7 @@
 #define NAVIGATION 3
 #define FUNCTION   4
 #define DIACRITICS 5
+#define ACCENT     6
 
 / {
     chosen { zmk,physical-layout = &default_layout; };
@@ -147,6 +148,24 @@ ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
+// Combining diacritical marks (U+0300 block) for the ACCENT layer. Not in
+// zmk-unicode's generated headers (it only ships precomposed characters), so
+// defined here directly the same way the Greek macros are: raw codepoints,
+// same value in both slots since these have no separate shifted form. Typed
+// *after* a base letter, they compose visually onto whatever precedes them,
+// so they work on any letter instead of only the ones with a precomposed
+// Unicode codepoint.
+#define UC_COMB_CIRCUMFLEX 0x0302 0x0302 // ◌̂
+#define UC_COMB_DIAERESIS  0x0308 0x0308 // ◌̈
+#define UC_COMB_GRAVE      0x0300 0x0300 // ◌̀
+#define UC_COMB_ACUTE      0x0301 0x0301 // ◌́
+#define UC_COMB_TILDE      0x0303 0x0303 // ◌̃
+#define UC_COMB_MACRON     0x0304 0x0304 // ◌̄
+#define UC_COMB_CEDILLA    0x0327 0x0327 // ◌̧
+#define UC_COMB_CARON      0x030C 0x030C // ◌̌
+#define UC_COMB_RING       0x030A 0x030A // ◌̊
+#define UC_COMB_DOT_ABOVE  0x0307 0x0307 // ◌̇
+
 / {
     behaviors {
         hml: home_row_mod_left {
@@ -241,6 +260,36 @@ ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
             bindings = <&uc UC_EL_SIGMA>, <&uc UC_EL_FINAL_SIGMA>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
+        acc_circumflex: acc_circumflex {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_COMB_CIRCUMFLEX>, <&uc UC_COMB_DIAERESIS>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        acc_grave: acc_grave {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_COMB_GRAVE>, <&uc UC_COMB_ACUTE>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        acc_tilde: acc_tilde {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_COMB_TILDE>, <&uc UC_COMB_MACRON>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        acc_cedilla: acc_cedilla {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_COMB_CEDILLA>, <&uc UC_COMB_CARON>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        acc_ring: acc_ring {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc UC_COMB_RING>, <&uc UC_COMB_DOT_ABOVE>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
     };
 };
 ZMK_BEHAVIOR(uc_upsilon, macro,
@@ -318,16 +367,16 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
             display-name = "OPTIMOT";
 
             // --------------------------------------------------------------------------------
-            // |  ù   |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L  | '`" |  Q  |  X  |
-            // | /\|  |  A  |  I  |  E  |  U  |  ,; |  none |  none |  P  |  T  |  S  |  R  |  N  |  ?! |
-            // | -_~  |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C  |  M  |  H  |  V  |  Z  |
-            //                    | ESC | TAB |SPACE|               |BACKS|ENTER| DEL |
+            // |  ù   |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L   | '`" |  Q  |  X  |
+            // | /\|  |  A  |  I  |  E  |  U  |  ,; |  none |  none |  P  |  T  |  S   |  R  |  N  |  ?! |
+            // | -_~  |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C  |  M   |  H  |  V  |  Z  |
+            //                    | ESC | TAB |SPACE|               |BACKS|ENTER|→ACCENT|
 
             bindings = <
-            &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &kp O             &uc UC_FR_E_ACUTE &kp B      &none &none &kp F           &kp D              &kp L        &QUOT_OPT   &kp Q            &kp X
-            &SLSH_OPT         &hml LGUI A       &hml LALT I &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none &none &kp P           &hmr RSHFT T       &hmr RCTRL S &hmr LALT R &lt DIACRITICS N &QMARK_OPT
-            &DASH_OPT         &kp K             &kp Y       &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                  &kp G           &c_ced             &kp M        &kp H       &kp V            &kp Z
-                                                            &lt FUNCTION ESC  &lt GREEK TAB     &kp SPACE              &lt SYMBOL BSPC &lt NAVIGATION RET &kp DEL
+            &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &kp O             &uc UC_FR_E_ACUTE &kp B      &none &none &kp F           &kp D              &kp L          &QUOT_OPT   &kp Q            &kp X
+            &SLSH_OPT         &hml LGUI A       &hml LALT I &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none &none &kp P           &hmr RSHFT T       &hmr RCTRL S   &hmr LALT R &lt DIACRITICS N &QMARK_OPT
+            &DASH_OPT         &kp K             &kp Y       &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                  &kp G           &c_ced             &kp M          &kp H       &kp V            &kp Z
+                                                            &lt FUNCTION ESC  &lt GREEK TAB     &kp SPACE              &lt SYMBOL BSPC &lt NAVIGATION RET &lt ACCENT DEL
             >;
         };
 
@@ -419,6 +468,30 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
             &none &uc UC_FR_A_CIRCUMFLEX &i_hat       &e_hat                 &u_hat       &none     &none &none &none    &kp RSHFT &none   &kp RALT &none &none
             &none &none                  &y_trema     &none                  &none        &none                 &none    &none     &none   &none    &none &none
                                                       &kp ESC                &kp TAB      &kp SPACE             &kp BSPC &kp RET   &kp DEL
+            >;
+        };
+
+        accent_layer {
+            display-name = "ACCENT";
+
+            // Trial layer: type a base letter normally, then hold Del (right thumb) and
+            // tap one of these to append a *combining* diacritic (U+0300 block) onto it,
+            // e.g. n + this circumflex key -> n̂ (n-circumflex), which has no
+            // precomposed Unicode codepoint and so isn't reachable any other way here.
+            // Unlike the Diacritics layer, this works on any letter, not just the French
+            // ones. If it earns its keep, it can replace the N-key Diacritics layer.
+            //
+            // --------------------------------------------------------------------------------
+            // |  n  |  n  |  n  |  n  |  n  |  n  |  none |  none |  n  |  n  |  n  |  n  |  n  |  n  |
+            // |  n  |  n  | ^/¨ | `/´ | ~/¯ |  n  |  none |  none |  n  | ¸/ˇ | ˚/˙ |  n  |  n  |  n  |
+            // |  n  |  n  |  n  |  n  |  n  |  n  |               |  n  |  n  |  n  |  n  |  n  |  n  |
+            //                   | ESC | TAB |SPACE|               |BSPC |ENTER| --- |
+
+            bindings = <
+            &none &none &none           &none      &none      &none     &none &none &none    &none        &none     &none &none &none
+            &none &none &acc_circumflex &acc_grave &acc_tilde &none     &none &none &none    &acc_cedilla &acc_ring &none &none &none
+            &none &none &none           &none      &none      &none                 &none    &none        &none     &none &none &none
+                                        &kp ESC    &kp TAB    &kp SPACE             &kp BSPC &kp RET      &none
             >;
         };
 
