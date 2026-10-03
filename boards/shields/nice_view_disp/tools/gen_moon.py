@@ -8,7 +8,6 @@ The phase shadow is computed at runtime by widgets/moon.c.
 Requires Pillow and DejaVu Sans Bold. Run from anywhere:
     python3 boards/shields/nice_view_disp/tools/gen_moon.py
 """
-import math
 import pathlib
 
 import numpy as np

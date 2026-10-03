@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """Generate the icons drawn on the nice!view status screens.
 
-- widgets/status_icons.c/.h: layer, modifier and caps icons (left half only)
-- widgets/tray_icons.c/.h: battery frame, charging bolt and Bluetooth icons (both halves)
+- widgets/status_icons.c/.h: layer, modifier (with caps state on Shift) and Bluetooth
+  profile icons (left half only)
+- widgets/tray_icons.c/.h: battery frame, charging bolt and Bluetooth connection icons
+  (both halves)
 
 Icons are drawn upright (as read on the keyboard) and emitted as LVGL
 LV_IMG_CF_INDEXED_1BIT images whose palette follows the widget colors
 (index 0 = LVGL_BACKGROUND, index 1 = LVGL_FOREGROUND), so they honor
-CONFIG_NICE_VIEW_DISP_WIDGET_INVERTED like the rest of the status screen.
+CONFIG_NICE_VIEW_DISP_WIDGET_INVERTED like the rest of the status screen. The
+charging bolt is 2-bit instead, with a transparent index so it can overlay the
+battery bar.
 
 Layer icons are indexed by layer position in config/corne_choc_pro.keymap.
 
@@ -21,7 +25,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
-LAYER_W, LAYER_H = 68, 66  # must match widgets/status.c
+LAYER_W, LAYER_H = 68, 66  # status.c fits this between the battery row and the mods grid
 MOD_W, MOD_H = 33, 21
 BT_W, BT_H = 13, 11  # number or pill; a 4 px band below holds the paired mark
 BT_MARK_H = 4
