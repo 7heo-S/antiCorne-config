@@ -57,8 +57,12 @@ static bool base_pixel(int px, int py) {
 }
 
 void moon_render(uint8_t buf[MOON_IMG_DATA_SIZE], uint32_t step, uint32_t steps) {
-    /* Fixed palette: the night sky stays black even with the inverted widget colors */
-    static const uint8_t palette[8] = {0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff};
+    /*
+     * Fixed palette: the night sky stays dark even with the inverted widget colors.
+     * The nice!view shows LVGL white as a dark pixel, so index 0 (sky) is white
+     * and index 1 (lit) is black, matching the LVGL_BACKGROUND of the status strip.
+     */
+    static const uint8_t palette[8] = {0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0xff};
     memcpy(buf, palette, sizeof(palette));
     uint8_t *data = buf + sizeof(palette);
     memset(data, 0, MOON_IMG_STRIDE * MOON_IMG_H);

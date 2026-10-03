@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 W, H = 68, 140
 R, CX, CY = 31, 34, 48  # must match widgets/moon.c
-LABEL, LABEL_Y, LABEL_SIZE = "AntiCorn", 108, 12
+LABEL, LABEL_SIZE = "AntiCorn", 12  # label sits flush with the bottom edge
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
 # maria as (x, y, rx, ry) ellipses in unit-disk coords (y up), near side as seen from the north
@@ -25,14 +25,20 @@ MARIA = [(-0.58, 0.10, 0.30, 0.42), (-0.30, 0.45, 0.26, 0.20), (0.14, 0.42, 0.16
          (0.33, -0.33, 0.08, 0.08), (-0.18, -0.36, 0.17, 0.12), (-0.48, -0.36, 0.09, 0.08),
          (0.00, 0.72, 0.38, 0.07), (0.00, 0.12, 0.12, 0.10)]
 CRATERS = [(-0.15, -0.70, 0.05), (-0.32, 0.16, 0.04), (-0.62, 0.20, 0.03)]  # Tycho, Copernicus, Kepler
-STARS = [(5, 8), (60, 6), (38, 4), (4, 60), (64, 46), (9, 92), (60, 90), (30, 96)]
+# stars as (x, y, size): 0 = single dot, 1 = small plus, 2 = long-armed sparkle
+STARS = [(9, 7, 2), (27, 3, 0), (46, 2, 0), (57, 10, 1), (64, 3, 0),
+         (4, 24, 0), (63, 29, 1), (6, 75, 1), (64, 70, 0),
+         (16, 93, 2), (41, 86, 0), (58, 98, 1), (29, 105, 0), (50, 114, 2), (7, 116, 0), (63, 121, 0)]
 BAYER = np.array([[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]]) / 16
 
 
 def render():
     img = np.zeros((H, W), np.uint8)
-    for sx, sy in STARS:
+    for sx, sy, size in STARS:
         img[sy, sx] = 1
+        for k in range(1, size + 1):
+            for dx, dy in ((k, 0), (-k, 0), (0, k), (0, -k)):
+                img[sy + dy, sx + dx] = 1
     for py in range(H):
         for px in range(W):
             x, y = (px + 0.5 - CX) / R, -(py + 0.5 - CY) / R
@@ -53,7 +59,8 @@ def render():
     text = Image.new("1", (W, H), 0)
     draw = ImageDraw.Draw(text)
     draw.fontmode = "1"
-    draw.text(((W - draw.textlength(LABEL, font=font)) / 2, LABEL_Y), LABEL, font=font, fill=1)
+    left, top, right, bottom = draw.textbbox((0, 0), LABEL, font=font)
+    draw.text(((W - (right - left)) / 2 - left, H - bottom), LABEL, font=font, fill=1)
     return img | np.array(text, np.uint8)
 
 
