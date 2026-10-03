@@ -23,6 +23,7 @@ struct status_state {
     int active_profile_index;
     bool active_profile_connected;
     bool active_profile_bonded;
+    uint8_t paired_profiles; /* bit i set when profile i has a paired device */
     uint8_t layer_index;
     const char *layer_label;
     uint8_t mods;

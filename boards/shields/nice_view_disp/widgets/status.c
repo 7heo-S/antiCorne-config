@@ -43,6 +43,7 @@ struct output_status_state {
     int active_profile_index;
     bool active_profile_connected;
     bool active_profile_bonded;
+    uint8_t paired_profiles;
 };
 
 struct layer_status_state {
@@ -173,13 +174,15 @@ static void draw_bottom(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_black_dsc);
 
     // Draw Bluetooth profiles in a row; only the top 24 rows of this canvas are on screen
-    // (bare number, or a filled pill for the active profile), ordered 5..1 from left to
-    // right to match the BT keys on the function layer
+    // (bare number, a bar under paired profiles, a filled pill for the active one),
+    // ordered 5..1 from left to right to match the BT keys on the function layer
     for (int i = 0; i < BT_ICONS_COUNT; i++) {
-        bool selected = i == state->active_profile_index;
+        int style = (i == state->active_profile_index)       ? 2
+                    : (state->paired_profiles & BIT(i)) ? 1
+                                                        : 0;
         int slot = BT_ICONS_COUNT - 1 - i;
         int x = slot * (CANVAS_SIZE - BT_ICON_W) / (BT_ICONS_COUNT - 1);
-        lv_canvas_draw_img(canvas, x, 6, bt_icons[i][selected], &img_dsc);
+        lv_canvas_draw_img(canvas, x, 5, bt_icons[i][style], &img_dsc);
     }
 
     // Rotate canvas
@@ -227,6 +230,7 @@ static void set_output_status(struct zmk_widget_status *widget,
     widget->state.active_profile_index = state->active_profile_index;
     widget->state.active_profile_connected = state->active_profile_connected;
     widget->state.active_profile_bonded = state->active_profile_bonded;
+    widget->state.paired_profiles = state->paired_profiles;
 
     draw_top(widget->obj, widget->cbuf, &widget->state);
     draw_bottom(widget->obj, widget->cbuf3, &widget->state);
@@ -238,11 +242,20 @@ static void output_status_update_cb(struct output_status_state state) {
 }
 
 static struct output_status_state output_status_get_state(const zmk_event_t *_eh) {
+    // Pairing or clearing a profile also raises zmk_ble_active_profile_changed
+    uint8_t paired_profiles = 0;
+    for (int i = 0; i < BT_ICONS_COUNT; i++) {
+        if (!zmk_ble_profile_is_open(i)) {
+            paired_profiles |= BIT(i);
+        }
+    }
+
     return (struct output_status_state){
         .selected_endpoint = zmk_endpoints_selected(),
         .active_profile_index = zmk_ble_active_profile_index(),
         .active_profile_connected = zmk_ble_active_profile_is_connected(),
         .active_profile_bonded = !zmk_ble_active_profile_is_open(),
+        .paired_profiles = paired_profiles,
     };
 }
 

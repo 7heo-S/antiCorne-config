@@ -9,7 +9,7 @@
 #define MOD_ICON_W 33
 #define MOD_ICON_H 21
 #define BT_ICON_W 13
-#define BT_ICON_H 11
+#define BT_ICON_H 15
 #define LAYER_ICONS_COUNT 6
 #define BT_ICONS_COUNT 5
 
@@ -20,5 +20,5 @@ extern const lv_img_dsc_t *const mod_icons[4][2];
 /* Shift tile while caps word (outlined pill) or caps lock (filled pill) is on */
 extern const lv_img_dsc_t shift_icon_caps_word;
 extern const lv_img_dsc_t shift_icon_caps_lock;
-/* [profile][off, on] */
-extern const lv_img_dsc_t *const bt_icons[BT_ICONS_COUNT][2];
+/* [profile][unpaired, paired, active] */
+extern const lv_img_dsc_t *const bt_icons[BT_ICONS_COUNT][3];

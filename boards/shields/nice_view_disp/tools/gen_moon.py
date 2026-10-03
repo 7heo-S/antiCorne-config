@@ -2,7 +2,7 @@
 """Generate widgets/moon_bitmap.h: the full-moon base image for the peripheral screen.
 
 The image is in viewing orientation (68 wide x 140 tall, the way the screen is
-read on the keyboard): fully lit moon texture, stars and the "AntiCorn" label.
+read on the keyboard): fully lit moon texture, stars and the "AntiCorne" label.
 The phase shadow is computed at runtime by widgets/moon.c.
 
 Requires Pillow and DejaVu Sans Bold. Run from anywhere:
@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 W, H = 68, 140
 R, CX, CY = 31, 34, 48  # must match widgets/moon.c
-LABEL, LABEL_SIZE = "AntiCorn", 12  # label sits flush with the bottom edge
+LABEL, LABEL_SIZE = "AntiCorne", 11  # label sits flush with the bottom edge
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
 # maria as (x, y, rx, ry) ellipses in unit-disk coords (y up), near side as seen from the north
