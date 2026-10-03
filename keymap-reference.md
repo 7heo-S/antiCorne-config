@@ -1,6 +1,6 @@
 # antiCorne keymap reference
 
-Corne Choc Pro, 7 layers. Generated from `config/corne_choc_pro.keymap`.
+Corne Choc Pro, 6 layers. Generated from `config/corne_choc_pro.keymap`.
 
 ## Notation
 
@@ -20,8 +20,7 @@ Corne Choc Pro, 7 layers. Generated from `config/corne_choc_pro.keymap`.
 | `Tab` (left thumb) | GREEK |
 | `Bspc` (right thumb) | SYMBOL |
 | `Enter` (right thumb) | NAVIGATION |
-| `N` (right pinky, home row) | DIACRITICS |
-| `Del` (right thumb) | ACCENT *(trial — see Layer 6)* |
+| `Del` (right thumb) | ACCENT *(see Layer 5)* |
 
 **Combos** (all default layer only, released by holding both keys within a short window):
 - **U** (left) + **T** (right) → toggles **Caps Word** (auto-releases at the next word break).
@@ -35,12 +34,12 @@ Corne Choc Pro, 7 layers. Generated from `config/corne_choc_pro.keymap`.
 | | | | | | | | | | | | | | |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | **ù** | **à** | **J** | **O** | **é** | **B** | | | **F** | **D** | **L** | **'**<br>⌥`"` ⇧`&#96;` | **Q** | **X** |
-| **/**<br>⌥`&#124;` ⇧`\` | **A**<br>⌘ | **I**<br>⌥ | **E**<br>⌃ | **U**<br>⇧ | **,**<br>⇧`;` | | | **P** | **T**<br>⇧ | **S**<br>⌃ | **R**<br>⌥ | **N**<br>→DIAC | **?**<br>⇧`!` |
+| **/**<br>⌥`&#124;` ⇧`\` | **A**<br>⌘ | **I**<br>⌥ | **E**<br>⌃ | **U**<br>⇧ | **,**<br>⇧`;` | | | **P** | **T**<br>⇧ | **S**<br>⌃ | **R**<br>⌥ | **N**<br>⌘ | **?**<br>⇧`!` |
 | **-**<br>⌥`~` ⇧`_` | **K** | **Y** | **è** | **.**<br>⇧`:` | **W** | | | **G** | **ç**<br>(⌥`C`) | **M** | **H** | **V** | **Z** |
 
 Thumbs: **Esc**→FUNC · **Tab**→GREEK · **Space** — **Bspc**→SYMBOL · **Enter**→NAV · **Del**→ACCENT
 
-`A`/`I`/`E`/`U` (left) and `T`/`S`/`R` (right) are home-row mods: hold for the modifier shown, tap for the letter.
+`A`/`I`/`E`/`U` (left) and `T`/`S`/`R`/`N` (right) are home-row mods, mirrored on both hands (Gui/Alt/Ctrl/Shift from pinky to index): hold for the modifier shown, tap for the letter.
 
 ---
 
@@ -49,12 +48,12 @@ Thumbs: **Esc**→FUNC · **Tab**→GREEK · **Space** — **Bspc**→SYMBOL · 
 | | | | | | | | | | | | | | |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | — | **%** | **&** | **$** | **^** | **[** | | | **]** | **7** | **8** | **9** | **#** | — |
-| **/**<br>⌥`&#124;` ⇧`\` | **√** | **+**<br>⇧`±` | **=**<br>⌥`≈` ⇧`≠` | **\***<br>⌥`×` ⇧`†` | **(** | | | **)** | **4**<br>⇧ | **5**<br>⌃ | **6**<br>⌥ | **0** | — |
+| **/**<br>⌥`&#124;` ⇧`\` | **√** | **+**<br>⇧`±` | **=**<br>⌥`≈` ⇧`≠` | **\***<br>⌥`×` ⇧`†` | **(** | | | **)** | **4**<br>⇧ | **5**<br>⌃ | **6**<br>⌥ | **0**<br>⌘ | — |
 | — | **@** | **<**<br>⌥`⟨` ⇧`«` | **-**<br>⌥`~` ⇧`_` | **>**<br>⌥`⟩` ⇧`»` | **{** | | | **}** | **1** | **2** | **3** | **.** | **,** |
 
 Thumbs: **Esc** · **Tab** · **Space** — — · **Enter** · **Del**
 
-`4`/`5`/`6` are home-row mods (same as `T`/`S`/`R` on the default layer). `^` sits on the `é` key's physical position — deliberately, to match the Accent layer's circumflex key at the same spot (see Layer 6).
+`4`/`5`/`6`/`0` are home-row mods (same as `T`/`S`/`R`/`N` on the default layer). `^` sits on the `é` key's physical position — deliberately, to match the Accent layer's circumflex key at the same spot (see Layer 5).
 
 ---
 
@@ -100,32 +99,18 @@ Thumbs: — · **Tab** · **Space** — **Bspc** · **Enter** · **Del**
 
 ---
 
-## Layer 5 — Diacritics ("hats & dots")
-
-| | | | | | | | | | | | | | |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| — | — | **æ** | **ô** | **œ** | — | | | — | — | — | — | — | — |
-| — | **â** | **î**<br>⌥`ï` | **ê**<br>⌥`ë` | **û**<br>⌥`ü` | — | | | — | **RShift** | — | **RAlt** | — | — |
-| — | — | **y**<br>⌥`ÿ` | — | — | — | | | — | — | — | — | — | — |
-
-Thumbs: **Esc** · **Tab** · **Space** — **Bspc** · **Enter** · **Del**
-
-Held with the `N` key (right pinky, home row on the default layer). `RShift`/`RAlt` are plain modifier keys here, handy for chording with the alt-tap accents on this layer.
-
----
-
-## Layer 6 — Accent
+## Layer 5 — Accent
 
 Held with **Del** (right thumb). Two different kinds of key on this layer:
 
-- **Letter positions** — tap directly for the precomposed circumflex form of that letter, *if one exists*. 12 do here: A, E, G, H, I, J, O, S, U, W, Y, Z. (C also has one — ĉ — but its slot went to cedilla instead, see below.) Of the 26 Latin letters, exactly **13 have no precomposed circumflex codepoint at all, in any font** (verified against Unicode, not guessed) — this isn't a gap in the layer, it's a gap in Unicode itself. 8 of these 12 (A, E, H, I, O, U, W, Y) *also* have a precomposed diaeresis, so those are Alt-tap for the second form — same pattern as the Diacritics layer's `e_hat`/`i_hat`/`u_hat` (E/I/U here literally reuse those same three behaviors). G, J, S, Z have no diaeresis codepoint either, so they stay circumflex-only.
+- **Letter positions** — tap directly for the precomposed circumflex form of that letter, *if one exists*. All 13 that exist are here: A, C, E, G, H, I, J, O, S, U, W, Y, Z — 12 as a plain tap, plus ĉ as `⌥` on the C position (its tap is the combining cedilla, see below). Of the 26 Latin letters, exactly **13 have no precomposed circumflex codepoint at all, in any font** (verified against Unicode, not guessed) — this isn't a gap in the layer, it's a gap in Unicode itself. 8 of these 12 (A, E, H, I, O, U, W, Y) *also* have a precomposed diaeresis, so those are Alt-tap for the second form. G, J, S, Z have no diaeresis codepoint either, so they stay circumflex-only.
 - **6 other positions** — combining marks (U+0300 block) instead of a replacement letter. Type the base letter **first**, then hold Del and tap one of these — it visually fuses onto whatever you just typed, so it works on **any** letter, including all 13 that have no precomposed circumflex (e.g. `n` + circumflex → n̂). 3 of these 6 carry a second mark on Shift.
 
 | | | | | | | | | | | | | | |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | — | — | **ĵ** | **ô**<br>⌥`ö` | **^**<br>⇧`ˇ` | — | | | — | — | — | **&#96;** | — | — |
 | — | **â**<br>⌥`ä` | **î**<br>⌥`ï` | **ê**<br>⌥`ë` | **û**<br>⌥`ü` | **´** | | | — | — | **ŝ** | — | — | — |
-| **¯**<br>⇧`~` | — | **ŷ**<br>⌥`ÿ` | — | **˙**<br>⇧`¨` | **ŵ**<br>⌥`ẅ` | | | **ĝ** | **¸** | — | **ĥ**<br>⌥`ḧ` | — | **ẑ** |
+| **¯**<br>⇧`~` | — | **ŷ**<br>⌥`ÿ` | — | **˙**<br>⇧`¨` | **ŵ**<br>⌥`ẅ` | | | **ĝ** | **¸**<br>⌥`ĉ` | — | **ĥ**<br>⌥`ḧ` | — | **ẑ** |
 
 Thumbs: **Esc** · **Tab** · **Space** — **Bspc** · **Enter** · —
 
@@ -136,11 +121,10 @@ Thumbs: **Esc** · **Tab** · **Space** — **Bspc** · **Enter** · —
 | `'` position | grave | combining grave | — |
 | `-` position | macron / tilde | combining macron | combining tilde |
 | `.` position | dot above / diaeresis | combining dot above | combining diaeresis |
-| `ç`/`C` position | cedilla | combining cedilla | — |
+| `ç`/`C` position | cedilla | combining cedilla | — (`⌥` → ĉ) |
 
 The `é`-position circumflex key deliberately shares its physical spot with the Symbol layer's `^` (see Layer 1 note) — same finger, same meaning, different layer. `?` (where circumflex used to live) is now free (`&none`).
 
-This was a trial to replace the N-key Diacritics layer above — arguably breaks home-row symmetry by living there, and this layer now covers noticeably more ground: 12 direct letters instead of 5 (each with its own diaeresis Alt-tap where one exists, same as Diacritics), plus universal combining-mark fallback for everything else, plus grave/acute/macron/tilde/cedilla/caron that Diacritics never had at all. Diacritics hasn't been removed, but is a likely retirement candidate.
 
 ---
 
@@ -152,14 +136,13 @@ This was a trial to replace the N-key Diacritics layer above — arguably breaks
 | ù à é | Default layer, plain keys |
 | è | Default layer, `.`/`è` key (row 2) |
 | ç | Default layer, `⌥ C` (as a letter) — general combining cedilla is also on the Accent layer, at the same `C` position |
-| æ | **A**+**E** combo (default layer), or Diacritics layer plain key |
-| œ | **O**+**E** combo (default layer), or Diacritics layer plain key |
-| ê/ë î/ï û/ü | Both layers, same tap/`⌥` pattern — Accent's E/I/U positions literally reuse Diacritics' `e_hat`/`i_hat`/`u_hat` behaviors |
-| â / ä | â on both layers; **ä is Accent-only** (Diacritics' `â` key has no diaeresis Alt-tap) |
-| ô / ö | ô on both layers; **ö is Accent-only** (same story as ä) |
-| y / ÿ | Diacritics layer, tap / `⌥` — or Accent layer's `Y` position, same tap/`⌥` pattern |
-| ĵ ŝ ĝ ẑ | Accent layer letter positions only — circumflex, no diaeresis form exists for these |
-| ŷ/ÿ ŵ/ẅ ĥ/ḧ | Accent layer letter positions only — tap/`⌥` pattern, Esperanto/Welsh/transliteration letters, not French, but free via the same mechanism |
+| æ | **A**+**E** combo (default layer) |
+| œ | **O**+**E** combo (default layer) |
+| â/ä ê/ë î/ï ô/ö û/ü | Accent layer letter positions, tap / `⌥` |
+| ÿ | Accent layer's `Y` position, `⌥` (tap gives ŷ) |
+| ĵ ŝ ĝ ẑ | Accent layer letter positions — circumflex, no diaeresis form exists for these |
+| ĉ | Accent layer, `⌥` on the C position |
+| ŷ/ÿ ŵ/ẅ ĥ/ḧ | Accent layer letter positions — tap/`⌥` pattern, Esperanto/Welsh/transliteration letters, not French, but free via the same mechanism |
 
 ### Greek letters & variants
 All on the **Greek layer**. Base forms are plain taps; θ, φ, ε, κ, π, ρ, σ also have an `⌥` (alt-tap) variant form (vartheta ϑ, varphi ϕ, varepsilon ϵ, varkappa ϰ, varpi ϖ, varrho ϱ, varsigma/final-sigma ς).
@@ -188,4 +171,4 @@ All on the **Greek layer**. Base forms are plain taps; θ, φ, ε, κ, π, ρ, �
 Undo `⌃Z` · Redo `⌃Y` · Cut `⌃X` · Copy `⌃C` · Paste `⌃V` · Home · End · Page Up · Page Down · arrow keys · media transport (volume/mute/play-pause/track skip)
 
 ### Any letter + an accent (Accent layer)
-Hold Del, then either tap a letter position directly (A, E, G, H, I, J, O, S, U, W, Y, Z give a precomposed circumflex form), or type the letter first and then hold Del and tap: acute (comma position), grave (quote position), circumflex / shift for caron (e-acute position), macron / shift for tilde (dash position), dot-above / shift for diaeresis (dot position), or cedilla (C position). The combining-mark keys work after any letter, including ones with no precomposed form at all (n + circumflex, etc).
+Hold Del, then either tap a letter position directly (A, E, G, H, I, J, O, S, U, W, Y, Z give a precomposed circumflex form, `⌥ C` gives ĉ), or type the letter first and then hold Del and tap: acute (comma position), grave (quote position), circumflex / shift for caron (e-acute position), macron / shift for tilde (dash position), dot-above / shift for diaeresis (dot position), or cedilla (C position). The combining-mark keys work after any letter, including ones with no precomposed form at all (n + circumflex, etc).
