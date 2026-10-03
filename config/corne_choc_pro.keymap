@@ -32,6 +32,19 @@
   default-mode = <UC_MODE_LINUX>;  // Default to Linux input system
 };
 
+// &uc for use inside mod-morphs. A mod-morph clears ZMK's modifier mask when it is
+// released, and &uc starts its input sequence (with all mods masked) immediately on
+// press. When the mod-morph is tapped through a home-row-mod hold-tap, its release
+// comes right after the press, unmasking held mods (e.g. Shift) in the middle of the
+// sequence, so uppercase output hangs. Starting the sequence 1 ms later, after that
+// release, avoids it. Use &uc_mm instead of &uc in every mod-morph binding.
+ZMK_BEHAVIOR(uc_mm, macro_two_param,
+    wait-ms = <0>;
+    tap-ms = <1>;
+    bindings = <&macro_tap &none>, <&macro_param_1to1>, <&macro_param_2to2>,
+               <&macro_tap &uc MACRO_PLACEHOLDER MACRO_PLACEHOLDER>;
+)
+
 
 // tap: comma | shift + tap: semicolon 
 ZMK_BEHAVIOR(COMMA_OPT, mod_morph,
@@ -95,55 +108,55 @@ ZMK_BEHAVIOR(DASH_OPT, mod_morph,
 // <⟨«
 // tap: < alt + tap: ⟨ (base for nesting)
 ZMK_BEHAVIOR(LTANGLE, mod_morph,
-    bindings = <&kp LT>, <&uc UC_MATHEMATICAL_LEFT_ANGLE_BRACKET>;
+    bindings = <&kp LT>, <&uc_mm UC_MATHEMATICAL_LEFT_ANGLE_BRACKET>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 // tap: < (or ⟨ on alt) | shift + tap: «
 ZMK_BEHAVIOR(LT_OPT, mod_morph,
-    bindings = <&LTANGLE>, <&uc UC_LEFT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK>;
+    bindings = <&LTANGLE>, <&uc_mm UC_LEFT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
 // >⟩»
 // tap: > alt + tap: ⟩ (base for nesting)
 ZMK_BEHAVIOR(GTANGLE, mod_morph,
-    bindings = <&kp GT>, <&uc UC_MATHEMATICAL_RIGHT_ANGLE_BRACKET>;
+    bindings = <&kp GT>, <&uc_mm UC_MATHEMATICAL_RIGHT_ANGLE_BRACKET>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 // tap: > (or ⟩ on alt) | shift + tap: »
 ZMK_BEHAVIOR(GT_OPT, mod_morph,
-    bindings = <&GTANGLE>, <&uc UC_RIGHT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK>;
+    bindings = <&GTANGLE>, <&uc_mm UC_RIGHT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
 // *×†
 // tap: * alt + tap: × (base for nesting)
 ZMK_BEHAVIOR(STARTIMES, mod_morph,
-    bindings = <&kp STAR>, <&uc UC_MULTIPLICATION_SIGN>;
+    bindings = <&kp STAR>, <&uc_mm UC_MULTIPLICATION_SIGN>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 // tap: * (or × on alt) | shift + tap: † (dagger)
 ZMK_BEHAVIOR(STAR_OPT, mod_morph,
-    bindings = <&STARTIMES>, <&uc UC_DAGGER>;
+    bindings = <&STARTIMES>, <&uc_mm UC_DAGGER>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
 // +±
 // tap: + | shift + tap: ±
 ZMK_BEHAVIOR(PLUS_OPT, mod_morph,
-    bindings = <&kp PLUS>, <&uc UC_PLUS_MINUS_SIGN>;
+    bindings = <&kp PLUS>, <&uc_mm UC_PLUS_MINUS_SIGN>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
 // =≠≈
 // tap: = alt + tap: ≈ (base for nesting)
 ZMK_BEHAVIOR(EQUALAPPROX, mod_morph,
-    bindings = <&kp EQUAL>, <&uc UC_ALMOST_EQUAL_TO>;
+    bindings = <&kp EQUAL>, <&uc_mm UC_ALMOST_EQUAL_TO>;
     mods = <(MOD_LALT|MOD_RALT)>;
 )
 // tap: = (or ≈ on alt) | shift + tap: ≠
 ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
-    bindings = <&EQUALAPPROX>, <&uc UC_NOT_EQUAL_TO>;
+    bindings = <&EQUALAPPROX>, <&uc_mm UC_NOT_EQUAL_TO>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
@@ -217,122 +230,122 @@ ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
         c_ced: c_ced {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp C>, <&uc UC_FR_C_CEDILLA>;
+            bindings = <&kp C>, <&uc_mm UC_FR_C_CEDILLA>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         // a / alt→æ and e / alt→œ, tapped through the hm_a/hm_e home-row mods
         a_ae: a_ae {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp A>, <&uc UC_FR_AE>;
+            bindings = <&kp A>, <&uc_mm UC_FR_AE>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         e_oe: e_oe {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp E>, <&uc UC_FR_OE>;
+            bindings = <&kp E>, <&uc_mm UC_FR_OE>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         e_hat: e_hat {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_FR_E_CIRCUMFLEX>, <&uc UC_FR_E_DIAERESIS>;
+            bindings = <&uc_mm UC_FR_E_CIRCUMFLEX>, <&uc_mm UC_FR_E_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         i_hat: i_hat {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_FR_I_CIRCUMFLEX>, <&uc UC_FR_I_DIAERESIS>;
+            bindings = <&uc_mm UC_FR_I_CIRCUMFLEX>, <&uc_mm UC_FR_I_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         u_hat: u_hat {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_FR_U_CIRCUMFLEX>, <&uc UC_FR_U_DIAERESIS>;
+            bindings = <&uc_mm UC_FR_U_CIRCUMFLEX>, <&uc_mm UC_FR_U_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         a_hat: a_hat {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_FR_A_CIRCUMFLEX>, <&uc UC_A_DIAERESIS>;
+            bindings = <&uc_mm UC_FR_A_CIRCUMFLEX>, <&uc_mm UC_A_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         o_hat: o_hat {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_FR_O_CIRCUMFLEX>, <&uc UC_O_DIAERESIS>;
+            bindings = <&uc_mm UC_FR_O_CIRCUMFLEX>, <&uc_mm UC_O_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         h_hat: h_hat {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_H_CIRCUMFLEX>, <&uc UC_H_DIAERESIS>;
+            bindings = <&uc_mm UC_H_CIRCUMFLEX>, <&uc_mm UC_H_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         w_hat: w_hat {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_W_CIRCUMFLEX>, <&uc UC_W_DIAERESIS>;
+            bindings = <&uc_mm UC_W_CIRCUMFLEX>, <&uc_mm UC_W_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         y_hat: y_hat {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_Y_CIRCUMFLEX>, <&uc UC_FR_Y_DIAERESIS>;
+            bindings = <&uc_mm UC_Y_CIRCUMFLEX>, <&uc_mm UC_FR_Y_DIAERESIS>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         theta_var: theta_var {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_EL_THETA>, <&uc UC_EL_THETA_SYM>;
+            bindings = <&uc_mm UC_EL_THETA>, <&uc_mm UC_EL_THETA_SYM>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         phi_var: phi_var {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_EL_PHI>, <&uc UC_EL_PHI_SYM>;
+            bindings = <&uc_mm UC_EL_PHI>, <&uc_mm UC_EL_PHI_SYM>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         epsilon_var: epsilon_var {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_EL_EPSILON>, <&uc UC_EL_EPSILON_SYM>;
+            bindings = <&uc_mm UC_EL_EPSILON>, <&uc_mm UC_EL_EPSILON_SYM>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         kappa_var: kappa_var {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_EL_KAPPA>, <&uc UC_EL_KAPPA_SYM>;
+            bindings = <&uc_mm UC_EL_KAPPA>, <&uc_mm UC_EL_KAPPA_SYM>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         pi_var: pi_var {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_EL_PI>, <&uc UC_EL_PI_SYM>;
+            bindings = <&uc_mm UC_EL_PI>, <&uc_mm UC_EL_PI_SYM>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         rho_var: rho_var {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_EL_RHO>, <&uc UC_EL_RHO_SYM>;
+            bindings = <&uc_mm UC_EL_RHO>, <&uc_mm UC_EL_RHO_SYM>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         sigma_var: sigma_var {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_EL_SIGMA>, <&uc UC_EL_FINAL_SIGMA>;
+            bindings = <&uc_mm UC_EL_SIGMA>, <&uc_mm UC_EL_FINAL_SIGMA>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         acc_circumflex_caron: acc_circumflex_caron {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_COMB_CIRCUMFLEX>, <&uc UC_COMB_CARON>;
+            bindings = <&uc_mm UC_COMB_CIRCUMFLEX>, <&uc_mm UC_COMB_CARON>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         acc_macron_tilde: acc_macron_tilde {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_COMB_MACRON>, <&uc UC_COMB_TILDE>;
+            bindings = <&uc_mm UC_COMB_MACRON>, <&uc_mm UC_COMB_TILDE>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         // C position on the ACCENT layer: tap keeps the combining cedilla that
@@ -340,13 +353,13 @@ ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
         acc_cedilla_c_hat: acc_cedilla_c_hat {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_COMB_CEDILLA>, <&uc UC_C_CIRCUMFLEX>;
+            bindings = <&uc_mm UC_COMB_CEDILLA>, <&uc_mm UC_C_CIRCUMFLEX>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         acc_dot_diaeresis: acc_dot_diaeresis {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&uc UC_COMB_DOT_ABOVE>, <&uc UC_COMB_DIAERESIS>;
+            bindings = <&uc_mm UC_COMB_DOT_ABOVE>, <&uc_mm UC_COMB_DIAERESIS>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };
