@@ -7,8 +7,7 @@
 
 #include <zephyr/kernel.h>
 #include "util.h"
-
-LV_IMG_DECLARE(bolt);
+#include "tray_icons.h"
 
 void rotate_canvas(lv_obj_t *canvas, lv_color_t cbuf[]) {
     static lv_color_t cbuf_tmp[CANVAS_SIZE * CANVAS_SIZE];
@@ -30,20 +29,20 @@ void rotate_canvas(lv_obj_t *canvas, lv_color_t cbuf[]) {
 }
 
 void draw_battery(lv_obj_t *canvas, const struct status_state *state) {
-    lv_draw_rect_dsc_t rect_black_dsc;
-    init_rect_dsc(&rect_black_dsc, LVGL_BACKGROUND);
-    lv_draw_rect_dsc_t rect_white_dsc;
-    init_rect_dsc(&rect_white_dsc, LVGL_FOREGROUND);
+    lv_draw_img_dsc_t img_dsc;
+    lv_draw_img_dsc_init(&img_dsc);
+    lv_draw_rect_dsc_t rect_fill_dsc;
+    init_rect_dsc(&rect_fill_dsc, LVGL_FOREGROUND);
+    rect_fill_dsc.radius = 2;
 
-    lv_canvas_draw_rect(canvas, 0, 2, 29, 12, &rect_white_dsc);
-    lv_canvas_draw_rect(canvas, 1, 3, 27, 10, &rect_black_dsc);
-    lv_canvas_draw_rect(canvas, 2, 4, (state->battery + 2) / 4, 8, &rect_white_dsc);
-    lv_canvas_draw_rect(canvas, 30, 5, 3, 6, &rect_white_dsc);
-    lv_canvas_draw_rect(canvas, 31, 6, 1, 4, &rect_black_dsc);
+    // Rounded outline, then a rounded charge bar (up to 25 px wide) inside it
+    lv_canvas_draw_img(canvas, 0, 0, &battery_frame, &img_dsc);
+    int fill = (state->battery + 2) / 4;
+    if (fill > 0) {
+        lv_canvas_draw_rect(canvas, 2, 4, fill, 8, &rect_fill_dsc);
+    }
 
     if (state->charging) {
-        lv_draw_img_dsc_t img_dsc;
-        lv_draw_img_dsc_init(&img_dsc);
         lv_canvas_draw_img(canvas, 9, -1, &bolt, &img_dsc);
     }
 }
