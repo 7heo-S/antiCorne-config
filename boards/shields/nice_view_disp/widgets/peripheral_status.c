@@ -22,9 +22,11 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/ble.h>
 
 #include "peripheral_status.h"
+#include "moon.h"
 
-LV_IMG_DECLARE(balloon);
-LV_IMG_DECLARE(mountain);
+/* One full lunar cycle per hour, advancing a phase every minute */
+#define MOON_STEPS 60
+#define MOON_STEP_MS (60 * 1000)
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -107,6 +109,27 @@ ZMK_DISPLAY_WIDGET_LISTENER(widget_peripheral_status, struct peripheral_status_s
                             output_status_update_cb, get_state)
 ZMK_SUBSCRIPTION(widget_peripheral_status, zmk_split_peripheral_status_changed);
 
+static uint8_t moon_buf[MOON_IMG_DATA_SIZE];
+static lv_img_dsc_t moon_img = {
+    .header.cf = LV_IMG_CF_INDEXED_1BIT,
+    .header.always_zero = 0,
+    .header.reserved = 0,
+    .header.w = MOON_IMG_W,
+    .header.h = MOON_IMG_H,
+    .data_size = MOON_IMG_DATA_SIZE,
+    .data = moon_buf,
+};
+static uint32_t moon_step;
+
+static void moon_timer_cb(lv_timer_t *timer) {
+    lv_obj_t *art = timer->user_data;
+
+    moon_step = (moon_step + 1) % MOON_STEPS;
+    moon_render(moon_buf, moon_step, MOON_STEPS);
+    lv_img_cache_invalidate_src(&moon_img);
+    lv_obj_invalidate(art);
+}
+
 #ifdef CONFIG_NICE_VIEW_DISP_ROTATE_180 // sets positions for default and flipped canvases
 int art_pos = 20;
 int top_pos = 0;
@@ -123,9 +146,11 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     lv_obj_t *art = lv_img_create(widget->obj);
-    bool random = sys_rand32_get() & 1;
-    lv_img_set_src(art, random ? &balloon : &mountain);
+    moon_step = sys_rand32_get() % MOON_STEPS;
+    moon_render(moon_buf, moon_step, MOON_STEPS);
+    lv_img_set_src(art, &moon_img);
     lv_obj_align(art, LV_ALIGN_TOP_LEFT, art_pos, 0);
+    lv_timer_create(moon_timer_cb, MOON_STEP_MS, art);
 
     sys_slist_append(&widgets, &widget->node);
     widget_battery_status_init();
