@@ -539,9 +539,15 @@ ZMK_BEHAVIOR(hm_e, hold_tap,
 
             // --------------------------------------------------------------------------------
             // |  n  |  n  |snd -|snd x|snd +|paste|  none |  none |  n   |PgDn |  ^  |PgUp |  n  |  n  |
-            // |  n  |SUPER| ALT |CTRL |SHIFT| cut |  none |  none | home |  <  | dwn |  >  | end |  n  |
+            // |  n  |SUPER|muhen|kana |henkn| cut |  none |  none | home |  <  | dwn |  >  | end |  n  |
+            //       |     |⌥ALT |^CTRL|⇧SHFT|   <- hold
             // |  n  |  n  |prev | ||> |next | copy|               |  n   |undo |  n  |redo |  n  |  n  |
             //                    | ESC | TAB |SPCE|               |BSPC | --- | DEL |
+            //
+            // I/E/U are home-row mods like on the base layer: hold for Alt/Ctrl/Shift,
+            // tap for the Japanese IME keys -- Muhenkan (IME off), Katakana/Hiragana,
+            // Henkan (IME on). Plain-held mods stay usable with the right-hand arrows
+            // since those are in hml's hold-trigger-key-positions.
             //
             // undo/redo/cut/copy/paste are sent as literal keyboard shortcuts
             // (Ctrl+Z/Y/X/C/V) rather than HID consumer "AC_*" codes, since most
@@ -551,7 +557,7 @@ ZMK_BEHAVIOR(hm_e, hold_tap,
 
             bindings = <
             &none &none    &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &kp LC(V) &none &none &none    &kp PG_DN &kp UP   &kp PG_UP &none   &none
-            &none &kp LGUI &kp LALT     &kp LCTRL  &kp LSHFT    &kp LC(X) &none &none &kp HOME &kp LEFT  &kp DOWN &kp RIGHT &kp END &none
+            &none &kp LGUI &hml LALT INT_MUHENKAN &hml LCTRL INT_KATAKANAHIRAGANA &hml LSHFT INT_HENKAN &kp LC(X) &none &none &kp HOME &kp LEFT  &kp DOWN &kp RIGHT &kp END &none
             &none &none    &kp C_PREV   &kp C_PP   &kp C_NEXT   &kp LC(C)             &none    &kp LC(Z) &none    &kp LC(Y) &none   &none
                                         &kp ESC    &kp TAB      &kp SPACE             &kp BSPC &none     &kp DEL
             >;
