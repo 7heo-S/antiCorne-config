@@ -6,7 +6,7 @@
  */
 
 #include <zephyr/kernel.h>
-#include <zephyr/random/random.h>
+#include <hal/nrf_power.h>
 
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
@@ -28,6 +28,20 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 /* One full lunar cycle per hour, advancing a phase every minute */
 #define MOON_STEPS 60
 #define MOON_STEP_MS (60 * 1000)
+
+/*
+ * The moon step is kept in GPREGRET2, which survives the System OFF reset of ZMK's deep
+ * sleep but is cleared on power-on: wake-ups resume the cycle, the power switch restarts
+ * it from the new moon. The top bit marks the stored step as valid.
+ */
+#define MOON_SAVED_VALID BIT(7)
+
+static uint32_t moon_load_step(void) {
+    uint32_t saved = NRF_POWER->GPREGRET2;
+    return (saved & MOON_SAVED_VALID) ? (saved & ~MOON_SAVED_VALID) % MOON_STEPS : 0;
+}
+
+static void moon_save_step(uint32_t step) { NRF_POWER->GPREGRET2 = MOON_SAVED_VALID | step; }
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -127,6 +141,7 @@ static void moon_timer_cb(lv_timer_t *timer) {
     lv_obj_t *art = timer->user_data;
 
     moon_step = (moon_step + 1) % MOON_STEPS;
+    moon_save_step(moon_step);
     moon_render(moon_buf, moon_step, MOON_STEPS);
     lv_img_cache_invalidate_src(&moon_img);
     lv_obj_invalidate(art);
@@ -148,7 +163,8 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     lv_obj_t *art = lv_img_create(widget->obj);
-    moon_step = sys_rand32_get() % MOON_STEPS;
+    moon_step = moon_load_step();
+    moon_save_step(moon_step);
     moon_render(moon_buf, moon_step, MOON_STEPS);
     lv_img_set_src(art, &moon_img);
     lv_obj_align(art, LV_ALIGN_TOP_LEFT, art_pos, 0);
