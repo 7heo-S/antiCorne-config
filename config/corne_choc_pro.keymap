@@ -45,6 +45,23 @@ ZMK_BEHAVIOR(uc_mm, macro_two_param,
                <&macro_tap &uc MACRO_PLACEHOLDER MACRO_PLACEHOLDER>;
 )
 
+// "Masked" modifier for the Gui/Alt home-row mods: presses the mod, then taps an
+// unused key (MASK_KEY) so the OS never sees the mod pressed and released alone,
+// which on its own opens the launcher/overview (Super) or the menu bar (Alt).
+// They then only ever act in combination with another key; a bare Alt/Super comes
+// from the both-Alts/both-Guis combos below (or the function/navigation layers).
+// wait-ms/tap-ms = 0 keeps the whole macro synchronous, so the mod is down before
+// the key that triggered the hold is replayed, and up before a retro-tap.
+#define MASK_KEY F24
+ZMK_BEHAVIOR(mmod, macro_one_param,
+    wait-ms = <0>;
+    tap-ms = <0>;
+    bindings = <&macro_param_1to1>, <&macro_press &kp MACRO_PLACEHOLDER>,
+               <&macro_tap &kp MASK_KEY>,
+               <&macro_pause_for_release>,
+               <&macro_param_1to1>, <&macro_release &kp MACRO_PLACEHOLDER>;
+)
+
 
 // tap: comma | shift + tap: semicolon 
 ZMK_BEHAVIOR(COMMA_OPT, mod_morph,
@@ -400,18 +417,20 @@ ZMK_BEHAVIOR(hm_iota, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
     quick-tap-ms = <100>;
-    bindings = <&kp>, <&uc_iota>;
+    bindings = <&mmod>, <&uc_iota>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
+    retro-tap;
 )
 
 ZMK_BEHAVIOR(hm_rho, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
     quick-tap-ms = <100>;
-    bindings = <&kp>, <&rho_var>;
+    bindings = <&mmod>, <&rho_var>;
     hold-trigger-key-positions = <0 1 2 3 4 5 14 15 16 17 18 19 28 29 30 31 32 33 40 41 42>;
     hold-trigger-on-release;
+    retro-tap;
 )
 
 // Shift/Alt home-row mods for the ACCENT layer, same U/T (shift) and I/R (alt)
@@ -433,9 +452,10 @@ ZMK_BEHAVIOR(acc_hm_i, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
     quick-tap-ms = <100>;
-    bindings = <&kp>, <&i_hat>;
+    bindings = <&mmod>, <&i_hat>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
+    retro-tap;
 )
 
 // Gui/Ctrl home-row mods for A and E on the default layer, same as hml but
@@ -445,9 +465,10 @@ ZMK_BEHAVIOR(hm_a, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
     quick-tap-ms = <100>;
-    bindings = <&kp>, <&a_ae>;
+    bindings = <&mmod>, <&a_ae>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
+    retro-tap;
 )
 
 ZMK_BEHAVIOR(hm_e, hold_tap,
@@ -457,6 +478,29 @@ ZMK_BEHAVIOR(hm_e, hold_tap,
     bindings = <&kp>, <&e_oe>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
+)
+
+// Gui/Alt home-row mods (hml/hmr with a masked hold, see mmod), so they only act
+// combined with another key. retro-tap: held alone past the tapping term and
+// released, they type the letter instead of doing nothing.
+ZMK_BEHAVIOR(hmlm, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <140>;
+    quick-tap-ms = <100>;
+    bindings = <&mmod>, <&kp>;
+    hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
+    hold-trigger-on-release;
+    retro-tap;
+)
+
+ZMK_BEHAVIOR(hmrm, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <140>;
+    quick-tap-ms = <100>;
+    bindings = <&mmod>, <&kp>;
+    hold-trigger-key-positions = <0 1 2 3 4 5 14 15 16 17 18 19 28 29 30 31 32 33 40 41 42>;
+    hold-trigger-on-release;
+    retro-tap;
 )
 
 // Hold both home-row shift mods (U left / T right) together to toggle caps word.
@@ -469,6 +513,23 @@ ZMK_BEHAVIOR(hm_e, hold_tap,
             require-prior-idle-ms = <150>;
             key-positions = <18 23>;
             bindings = <&caps_word>;
+            layers = <DEFAULT>;
+        };
+        // Both home-row Alts (I left / R right) together: a bare Alt, since the
+        // home-row Alts themselves are masked (see mmod).
+        combo_alt {
+            timeout-ms = <50>;
+            require-prior-idle-ms = <150>;
+            key-positions = <16 25>;
+            bindings = <&kp LALT>;
+            layers = <DEFAULT>;
+        };
+        // Same for both home-row Guis (A left / N right): a bare Super.
+        combo_gui {
+            timeout-ms = <50>;
+            require-prior-idle-ms = <150>;
+            key-positions = <15 26>;
+            bindings = <&kp LGUI>;
             layers = <DEFAULT>;
         };
     };
@@ -491,7 +552,7 @@ ZMK_BEHAVIOR(hm_e, hold_tap,
 
             bindings = <
             &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &kp O             &uc UC_FR_E_ACUTE &kp B      &none &none &kp F           &kp D              &kp L          &QUOT_OPT   &kp Q            &kp X
-            &SLSH_OPT         &hm_a LGUI 0      &hml LALT I &hm_e LCTRL 0     &hml LSHFT U      &COMMA_OPT &none &none &kp P           &hmr RSHFT T       &hmr RCTRL S   &hmr LALT R &hmr RGUI N       &QMARK_OPT
+            &SLSH_OPT         &hm_a LGUI 0      &hmlm LALT I &hm_e LCTRL 0     &hml LSHFT U      &COMMA_OPT &none &none &kp P           &hmr RSHFT T       &hmr RCTRL S   &hmrm LALT R &hmrm RGUI N       &QMARK_OPT
             &DASH_OPT         &kp K             &kp Y       &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                  &kp G           &c_ced             &kp M          &kp H       &kp V            &kp Z
                                                             &lt FUNCTION ESC  &lt GREEK TAB     &kp SPACE              &lt SYMBOL BSPC &lt NAVIGATION RET &lt ACCENT DEL
             >;
@@ -511,7 +572,7 @@ ZMK_BEHAVIOR(hm_e, hold_tap,
 
             bindings = <
             &none     &kp PRCNT          &kp AMPS  &kp DLLR   &kp CARET &kp LBKT  &none &none &kp RBKT &kp N7        &kp N8        &kp N9       &kp HASH &none
-            &SLSH_OPT &uc UC_SQUARE_ROOT &PLUS_OPT &EQUAL_OPT &STAR_OPT &kp LPAR  &none &none &kp RPAR &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6 &hmr RGUI N0 &none
+            &SLSH_OPT &uc UC_SQUARE_ROOT &PLUS_OPT &EQUAL_OPT &STAR_OPT &kp LPAR  &none &none &kp RPAR &hmr RSHFT N4 &hmr RCTRL N5 &hmrm LALT N6 &hmrm RGUI N0 &none
             &none     &kp AT             &LT_OPT   &DASH_OPT  &GT_OPT   &kp LBRC              &kp RBRC &kp N1        &kp N2        &kp N3       &kp DOT  &kp COMMA
                                                    &kp ESC    &kp TAB   &kp SPACE             &none    &kp RET       &kp DEL
             >;
@@ -557,7 +618,7 @@ ZMK_BEHAVIOR(hm_e, hold_tap,
 
             bindings = <
             &none &none    &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &kp LC(V) &none &none &none    &kp PG_DN &kp UP   &kp PG_UP &none   &none
-            &none &kp LGUI &hml LALT INT_MUHENKAN &hml LCTRL INT_KATAKANAHIRAGANA &hml LSHFT INT_HENKAN &kp LC(X) &none &none &kp HOME &kp LEFT  &kp DOWN &kp RIGHT &kp END &none
+            &none &kp LGUI &hmlm LALT INT_MUHENKAN &hml LCTRL INT_KATAKANAHIRAGANA &hml LSHFT INT_HENKAN &kp LC(X) &none &none &kp HOME &kp LEFT  &kp DOWN &kp RIGHT &kp END &none
             &none &none    &kp C_PREV   &kp C_PP   &kp C_NEXT   &kp LC(C)             &none    &kp LC(Z) &none    &kp LC(Y) &none   &none
                                         &kp ESC    &kp TAB      &kp SPACE             &kp BSPC &none     &kp DEL
             >;
