@@ -22,10 +22,10 @@ Corne Choc Pro, 6 layers. Generated from `config/corne_choc_pro.keymap`.
 | `Enter` (right thumb) | NAVIGATION |
 | `Del` (right thumb) | ACCENT *(see Layer 5)* |
 
-**Combos** (all default layer only, released by holding both keys within a short window):
+**Combos** (all default layer only, triggered by pressing both keys within a short window, and only after a brief pause in typing so fast rolls don't fire them):
 - **U** (left) + **T** (right) → toggles **Caps Word** (auto-releases at the next word break).
-- **A** + **E** → **æ**.
-- **O** + **E** → **œ** — same column, different row (both likely the same finger), so this one has a longer timeout than the other two to give that roll more room.
+- **I** (left) + **R** (right) → a bare **Alt** (the home-row Alts only act combined with another key).
+- **A** (left) + **N** (right) → a bare **Super** (same for the home-row Guis).
 
 ---
 
@@ -33,13 +33,13 @@ Corne Choc Pro, 6 layers. Generated from `config/corne_choc_pro.keymap`.
 
 | | | | | | | | | | | | | | |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **ù** | **à** | **J** | **O** | **é** | **B** | | | **F** | **D** | **L** | **'**<br>⌥`"` ⇧`&#96;` | **Q** | **X** |
-| **/**<br>⌥`&#124;` ⇧`\` | **A**<br>⌘ | **I**<br>⌥ | **E**<br>⌃ | **U**<br>⇧ | **,**<br>⇧`;` | | | **P** | **T**<br>⇧ | **S**<br>⌃ | **R**<br>⌥ | **N**<br>⌘ | **?**<br>⇧`!` |
+| **ù** | **à** | **J** | **O**<br>⌥`œ` | **é** | **B** | | | **F** | **D** | **L** | **'**<br>⌥`"` ⇧`&#96;` | **Q** | **X** |
+| **/**<br>⌥`&#124;` ⇧`\` | **A**<br>⌘ · ⌥`æ` | **I**<br>⌥ | **E**<br>⌃ | **U**<br>⇧ | **,**<br>⇧`;` | | | **P** | **T**<br>⇧ | **S**<br>⌃ | **R**<br>⌥ | **N**<br>⌘ | **?**<br>⇧`!` |
 | **-**<br>⌥`~` ⇧`_` | **K** | **Y** | **è** | **.**<br>⇧`:` | **W** | | | **G** | **ç**<br>(⌥`C`) | **M** | **H** | **V** | **Z** |
 
 Thumbs: **Esc**→FUNC · **Tab**→GREEK · **Space** — **Bspc**→SYMBOL · **Enter**→NAV · **Del**→ACCENT
 
-`A`/`I`/`E`/`U` (left) and `T`/`S`/`R`/`N` (right) are home-row mods, mirrored on both hands (Gui/Alt/Ctrl/Shift from pinky to index): hold for the modifier shown, tap for the letter.
+`A`/`I`/`E`/`U` (left) and `T`/`S`/`R`/`N` (right) are home-row mods, mirrored on both hands (Gui/Alt/Ctrl/Shift from pinky to index): hold for the modifier shown, tap for the letter. The Gui and Alt ones (`A`/`I`/`R`/`N`, and the same keys on the other layers) only ever act combined with another key: held alone and released, they do nothing, and the OS never sees a lone Super/Alt (no overview or menu bar by accident). For a bare Alt or Super, use the combos above. Mods work across hands only, so for `⌥ A`/`⌥ O` (æ/œ) hold the right-hand Alt (`R`).
 
 ---
 
@@ -62,7 +62,7 @@ Thumbs: **Esc** · **Tab** · **Space** — — · **Enter** · **Del**
 | | | | | | | | | | | | | | |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | — | — | — | **ο** omikron | **θ**<br>⌥`ϑ` | **β** beta | | | **φ**<br>⌥`ϕ` | **δ** delta | **λ** lambda | — | — | **ξ** xi |
-| — | **α** alpha | **ι** iota<br>⌥ | **ε**<br>⌥`ϵ` | **υ** upsilon<br>⇧ | | | | **π**<br>⌥`ϖ` | **τ** tau<br>⇧ | **σ**<br>⌥`ς` | **ρ**<br>⌥`ϱ`<br>(⌥ hold) | **ν** nu | — |
+| — | **α** alpha | **ι** iota<br>⌥ | **ε**<br>⌥`ϵ` | **υ** upsilon<br>⇧ | — | | | **π**<br>⌥`ϖ` | **τ** tau<br>⇧ | **σ**<br>⌥`ς` | **ρ**<br>⌥`ϱ`<br>(⌥ hold) | **ν** nu | — |
 | **ψ** psi | **κ**<br>⌥`ϰ` | — | — | — | **ω** omega | | | **γ** gamma | **χ** chi | **μ** mu | **η** eta | — | **ζ** zeta |
 
 Thumbs: **Esc** · — · **Space** — **Bspc** · **Enter** · **Del**
@@ -76,10 +76,12 @@ Thumbs: **Esc** · — · **Space** — **Bspc** · **Enter** · **Del**
 | | | | | | | | | | | | | | |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | — | — | **Vol−** | **Mute** | **Vol+** | **Paste**<br>(⌃V) | | | — | **PgDn** | **↑** | **PgUp** | — | — |
-| — | **Gui** | **Alt** | **Ctrl** | **Shift** | **Cut**<br>(⌃X) | | | **Home** | **←** | **↓** | **→** | **End** | — |
+| — | **Gui** | **Muhenkan**<br>⌥ | **Kana**<br>⌃ | **Henkan**<br>⇧ | **Cut**<br>(⌃X) | | | **Home** | **←** | **↓** | **→** | **End** | — |
 | — | — | **⏮** prev track | **⏯** play/pause | **⏭** next track | **Copy**<br>(⌃C) | | | — | **Undo**<br>(⌃Z) | — | **Redo**<br>(⌃Y) | — | — |
 
 Thumbs: **Esc** · **Tab** · **Space** — **Bspc** · — · **Del**
+
+`I`/`E`/`U` are home-row mods like on the default layer (hold for Alt/Ctrl/Shift, e.g. with the arrows), and tap for the Japanese IME keys: **Muhenkan** turns the IME off, **Henkan** turns it on, **Kana** is Katakana/Hiragana (bound in Mozc). They're separate on/off keys rather than a toggle, so you always know which state you'll land in. `A` is a plain Gui key (usable alone).
 
 Undo/redo/cut/copy/paste are literal `Ctrl+Z/Y/X/C/V` shortcuts, not HID consumer codes — Linux and most apps don't listen for the consumer "AC_*" versions. Media transport keys (volume, mute, play/pause, track skip) stay as real consumer codes since those work everywhere.
 
@@ -109,10 +111,12 @@ Held with **Del** (right thumb). Two different kinds of key on this layer:
 | | | | | | | | | | | | | | |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | — | — | **ĵ** | **ô**<br>⌥`ö` | **^**<br>⇧`ˇ` | — | | | — | — | — | **&#96;** | — | — |
-| — | **â**<br>⌥`ä` | **î**<br>⌥`ï` | **ê**<br>⌥`ë` | **û**<br>⌥`ü` | **´** | | | — | — | **ŝ** | — | — | — |
+| — | **â**<br>⌥`ä` | **î**<br>⌥`ï`<br>⌥ | **ê**<br>⌥`ë` | **û**<br>⌥`ü`<br>⇧ | **´** | | | — | **Shift** | **ŝ** | **Alt** | — | — |
 | **¯**<br>⇧`~` | — | **ŷ**<br>⌥`ÿ` | — | **˙**<br>⇧`¨` | **ŵ**<br>⌥`ẅ` | | | **ĝ** | **¸**<br>⌥`ĉ` | — | **ĥ**<br>⌥`ḧ` | — | **ẑ** |
 
 Thumbs: **Esc** · **Tab** · **Space** — **Bspc** · **Enter** · —
+
+Shift and Alt sit at the same spots as on the default layer: `U`/`I` are home-row mods (hold for Shift/Alt, tap for û/î), `T`/`R` are plain Shift/Alt keys. Hold Shift for the uppercase letters and the Shift-tap marks below, Alt for the `⌥` forms.
 
 | Key | Meaning | Tap | Shift+tap |
 |---|---|---|---|
@@ -136,8 +140,8 @@ The `é`-position circumflex key deliberately shares its physical spot with the 
 | ù à é | Default layer, plain keys |
 | è | Default layer, `.`/`è` key (row 2) |
 | ç | Default layer, `⌥ C` (as a letter) — general combining cedilla is also on the Accent layer, at the same `C` position |
-| æ | **A**+**E** combo (default layer) |
-| œ | **O**+**E** combo (default layer) |
+| æ | Default layer, `⌥ A` |
+| œ | Default layer, `⌥ O` |
 | â/ä ê/ë î/ï ô/ö û/ü | Accent layer letter positions, tap / `⌥` |
 | ÿ | Accent layer's `Y` position, `⌥` (tap gives ŷ) |
 | ĵ ŝ ĝ ẑ | Accent layer letter positions — circumflex, no diaeresis form exists for these |

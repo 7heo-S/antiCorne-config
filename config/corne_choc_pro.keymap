@@ -256,17 +256,17 @@ ZMK_BEHAVIOR(EQUAL_OPT, mod_morph,
             bindings = <&kp C>, <&uc_mm UC_FR_C_CEDILLA>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
-        // a / alt→æ and e / alt→œ, tapped through the hm_a/hm_e home-row mods
+        // a / alt→æ (tapped through the hm_a home-row mod) and o / alt→œ
         a_ae: a_ae {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp A>, <&uc_mm UC_FR_AE>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
-        e_oe: e_oe {
+        o_oe: o_oe {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp E>, <&uc_mm UC_FR_OE>;
+            bindings = <&kp O>, <&uc_mm UC_FR_OE>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         e_hat: e_hat {
@@ -461,23 +461,14 @@ ZMK_BEHAVIOR(acc_hm_i, hold_tap,
     hold-trigger-on-release;
 )
 
-// Gui/Ctrl home-row mods for A and E on the default layer, same as hml but
-// tapping through a_ae/e_oe, so alt + A gives æ and alt + E gives œ. A and E
-// are left-hand keys, so the alt comes from the right hand (R), like for ç.
+// Gui home-row mod for A on the default layer, same as hmlm but tapping through
+// a_ae, so alt + A gives æ. A is a left-hand key, so the alt comes from the right
+// hand (R), like for ç and œ.
 ZMK_BEHAVIOR(hm_a, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
     quick-tap-ms = <100>;
     bindings = <&mmod>, <&a_ae>;
-    hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
-    hold-trigger-on-release;
-)
-
-ZMK_BEHAVIOR(hm_e, hold_tap,
-    flavor = "balanced";
-    tapping-term-ms = <140>;
-    quick-tap-ms = <100>;
-    bindings = <&kp>, <&e_oe>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
 )
@@ -545,14 +536,14 @@ ZMK_BEHAVIOR(hmrm, hold_tap,
             display-name = "OPTIMOT";
 
             // --------------------------------------------------------------------------------
-            // |  ù   |  à  |  J  |  O  |  é  |  B  |  none |  none |  F  |  D  |  L   | '`" |  Q  |  X  |
-            // | /\|  | Aæ  |  I  | Eœ  |  U  |  ,; |  none |  none |  P  |  T  |  S   |  R  |  N  |  ?! |
+            // |  ù   |  à  |  J  | Oœ  |  é  |  B  |  none |  none |  F  |  D  |  L   | '`" |  Q  |  X  |
+            // | /\|  | Aæ  |  I  |  E  |  U  |  ,; |  none |  none |  P  |  T  |  S   |  R  |  N  |  ?! |
             // | -_~  |  K  |  Y  |  è  |  .: |  W  |               |  G  |  C  |  M   |  H  |  V  |  Z  |
             //                    | ESC | TAB |SPACE|               |BACKS|ENTER|→ACCENT|
 
             bindings = <
-            &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &kp O             &uc UC_FR_E_ACUTE &kp B      &none &none &kp F           &kp D              &kp L          &QUOT_OPT   &kp Q            &kp X
-            &SLSH_OPT         &hm_a LGUI 0      &hmlm LALT I &hm_e LCTRL 0     &hml LSHFT U      &COMMA_OPT &none &none &kp P           &hmr RSHFT T       &hmr RCTRL S   &hmrm LALT R &hmrm RGUI N       &QMARK_OPT
+            &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &o_oe             &uc UC_FR_E_ACUTE &kp B      &none &none &kp F           &kp D              &kp L          &QUOT_OPT   &kp Q            &kp X
+            &SLSH_OPT         &hm_a LGUI 0      &hmlm LALT I &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none &none &kp P           &hmr RSHFT T       &hmr RCTRL S   &hmrm LALT R &hmrm RGUI N       &QMARK_OPT
             &DASH_OPT         &kp K             &kp Y       &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                  &kp G           &c_ced             &kp M          &kp H       &kp V            &kp Z
                                                             &lt FUNCTION ESC  &lt GREEK TAB     &kp SPACE              &lt SYMBOL BSPC &lt NAVIGATION RET &lt ACCENT DEL
             >;
