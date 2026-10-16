@@ -93,11 +93,11 @@ Undo/redo/cut/copy/paste are literal `Ctrl+Z/Y/X/C/V` shortcuts, not HID consume
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | **BT clear** | **BT 5** | **BT 4** | **BT 3** | **BT 2** | **BT 1** | | | — | — | **F7** | **F8** | **F9** | **F12** |
 | — | **Gui** | **Alt** | **Ctrl** | **Shift** | — | | | — | — | **F4** | **F5** | **F6** | **F11** |
-| **RGB toggle** | **RGB white** | **RGB purple** | — | — | — | | | — | — | **F1** | **F2** | **F3** | **F10** |
+| **RGB toggle** | **RGB dimmer** | **RGB brighter** | **RGB white** | **RGB purple** | — | | | — | — | **F1** | **F2** | **F3** | **F10** |
 
 Thumbs: — · **Tab** · **Space** — **Bspc** · **Enter** · **Del**
 
-`BT 1`–`BT 5` select Bluetooth profile 1–5 (`BT_SEL 0`–`4` in code — profile numbers are 1-indexed here, 0-indexed in source). F-keys are arranged like a numpad (F1-F9 as a 3×3 grid bottom-to-top), matching the numbers on the Symbol layer; F10-F12 fill the remaining pinky column. RGB toggle turns the underglow on/off; RGB white/purple set its color. The keyboard remembers the last color/state across reboots (it overrides the build's default, white).
+`BT 1`–`BT 5` select Bluetooth profile 1–5 (`BT_SEL 0`–`4` in code — profile numbers are 1-indexed here, 0-indexed in source). F-keys are arranged like a numpad (F1-F9 as a 3×3 grid bottom-to-top), matching the numbers on the Symbol layer; F10-F12 fill the remaining pinky column. RGB toggle turns the underglow on/off, dimmer/brighter step its brightness (10 steps, up to the 40% cap), RGB white/purple set its color at full brightness. The keyboard remembers the last color/state across reboots (it overrides the build's default, white).
 
 ---
 

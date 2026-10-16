@@ -710,17 +710,18 @@ ZMK_BEHAVIOR(hmrm, hold_tap,
             // --------------------------------------------------------------------------------
             // |BTCLR|BT  5|BT  4|BT  3|BT  2|BT  1|  none |  none |  n  |  n  | F7 | F8 | F9 | F12|
             // |  n  |SUPER| ALT |CTRL |SHIFT|  n  |  none |  none |  n  |  n  | F4 | F5 | F6 | F11|
-            // | RGB |WHITE|PURPL|  n  |  n  |  n  |               |  n  |  n  | F1 | F2 | F3 | F10|
+            // | RGB |BRI- |BRI+ |WHITE|PURPL|  n  |               |  n  |  n  | F1 | F2 | F3 | F10|
             //                   | --- | TAB |SPACE|               |BSPCE|ENTER| DEL|
             //
-            // RGB toggles the underglow; WHITE/PURPL set its color (and save it, like the
-            // toggle: the saved state overrides the *_START defaults in the defconfigs).
-            // Brightness 100 is scaled down to CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX.
+            // RGB toggles the underglow, BRI-/BRI+ step its brightness, WHITE/PURPL set its
+            // color at full brightness. All of them save the state, which then overrides
+            // the *_START defaults in the defconfigs. Brightness is scaled into
+            // [0, CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX], so "full" is that cap (40%).
 
             bindings = <
             &bt BT_CLR      &bt BT_SEL 4 &bt BT_SEL 3 &bt BT_SEL 2 &bt BT_SEL 1 &bt BT_SEL 0 &none &none &none    &none   &kp F7  &kp F8 &kp F9 &kp F12
             &none           &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none        &none &none &none    &none   &kp F4  &kp F5 &kp F6 &kp F11
-            &rgb_ug RGB_TOG &rgb_ug RGB_COLOR_HSB(0,0,100) &rgb_ug RGB_COLOR_HSB(270,100,100) &none &none &none &none    &none   &kp F1  &kp F2 &kp F3 &kp F10
+            &rgb_ug RGB_TOG &rgb_ug RGB_BRD &rgb_ug RGB_BRI &rgb_ug RGB_COLOR_HSB(0,0,100) &rgb_ug RGB_COLOR_HSB(270,100,100) &none &none    &none   &kp F1  &kp F2 &kp F3 &kp F10
                                                       &none        &kp TAB      &kp SPACE                &kp BSPC &kp RET &kp DEL
             >;
         };
