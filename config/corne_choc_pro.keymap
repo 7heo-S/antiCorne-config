@@ -57,7 +57,7 @@ ZMK_BEHAVIOR(uc_mm, macro_two_param,
 // defaults to -1), so a mask tap on press turned hold-taps pressed before the
 // mod's hold was decided (Enter's navigation layer, T/S/R/N) into instant taps.
 // wait-ms/tap-ms = 0 keeps the whole macro synchronous, so the mod is down before
-// the key that triggered the hold is replayed, and up before a retro-tap.
+// the key that triggered the hold is replayed.
 #define MASK_KEY F24
 ZMK_BEHAVIOR(mmod, macro_one_param,
     wait-ms = <0>;
@@ -426,7 +426,6 @@ ZMK_BEHAVIOR(hm_iota, hold_tap,
     bindings = <&mmod>, <&uc_iota>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
-    retro-tap;
 )
 
 ZMK_BEHAVIOR(hm_rho, hold_tap,
@@ -436,7 +435,6 @@ ZMK_BEHAVIOR(hm_rho, hold_tap,
     bindings = <&mmod>, <&rho_var>;
     hold-trigger-key-positions = <0 1 2 3 4 5 14 15 16 17 18 19 28 29 30 31 32 33 40 41 42>;
     hold-trigger-on-release;
-    retro-tap;
 )
 
 // Shift/Alt home-row mods for the ACCENT layer, same U/T (shift) and I/R (alt)
@@ -461,7 +459,6 @@ ZMK_BEHAVIOR(acc_hm_i, hold_tap,
     bindings = <&mmod>, <&i_hat>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
-    retro-tap;
 )
 
 // Gui/Ctrl home-row mods for A and E on the default layer, same as hml but
@@ -474,7 +471,6 @@ ZMK_BEHAVIOR(hm_a, hold_tap,
     bindings = <&mmod>, <&a_ae>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
-    retro-tap;
 )
 
 ZMK_BEHAVIOR(hm_e, hold_tap,
@@ -487,8 +483,8 @@ ZMK_BEHAVIOR(hm_e, hold_tap,
 )
 
 // Gui/Alt home-row mods (hml/hmr with a masked hold, see mmod), so they only act
-// combined with another key. retro-tap: held alone past the tapping term and
-// released, they type the letter instead of doing nothing.
+// combined with another key. Held alone past the tapping term and released,
+// they do nothing, like the Shift/Ctrl ones (no retro-tap).
 ZMK_BEHAVIOR(hmlm, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <140>;
@@ -496,7 +492,6 @@ ZMK_BEHAVIOR(hmlm, hold_tap,
     bindings = <&mmod>, <&kp>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
-    retro-tap;
 )
 
 ZMK_BEHAVIOR(hmrm, hold_tap,
@@ -506,7 +501,6 @@ ZMK_BEHAVIOR(hmrm, hold_tap,
     bindings = <&mmod>, <&kp>;
     hold-trigger-key-positions = <0 1 2 3 4 5 14 15 16 17 18 19 28 29 30 31 32 33 40 41 42>;
     hold-trigger-on-release;
-    retro-tap;
 )
 
 // Hold both home-row shift mods (U left / T right) together to toggle caps word.
