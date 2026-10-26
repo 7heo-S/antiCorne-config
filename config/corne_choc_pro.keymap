@@ -46,7 +46,7 @@ ZMK_BEHAVIOR(uc_mm, macro_two_param,
 )
 
 // "Masked" modifier for the Gui/Alt home-row mods: holds the mod, then taps an
-// unused key (MASK_KEY) just before releasing it, so the OS never sees the mod
+// otherwise idle key (MASK_KEY) just before releasing it, so the OS never sees the mod
 // pressed and released alone, which on its own opens the launcher/overview
 // (Super) or the menu bar (Alt). They then only ever act in combination with
 // another key; a bare Alt/Super comes from the both-Alts/both-Guis combos below
@@ -58,7 +58,12 @@ ZMK_BEHAVIOR(uc_mm, macro_two_param,
 // mod's hold was decided (Enter's navigation layer, T/S/R/N) into instant taps.
 // wait-ms/tap-ms = 0 keeps the whole macro synchronous, so the mod is down before
 // the key that triggered the hold is replayed.
-#define MASK_KEY F24
+// The mask is a modifier (Right Ctrl, as QMK's mod neutralizer) rather than a
+// spare F-key: F13-F24 have no keysym (or a live one, like F23/F13) in the
+// default XKB layout, and apps dropping a keysym-less key never see it, so
+// Firefox still opened its menu bar on an Alt+F24 release. Every app sees Ctrl,
+// and a Ctrl tap under Alt/Gui does nothing.
+#define MASK_KEY RCTRL
 
 // Home-row mods pressed less than this many ms after another key resolve as a tap
 // straight away, with no hold decision: no accidental mods while typing fast. A
