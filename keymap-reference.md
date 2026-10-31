@@ -39,7 +39,7 @@ Corne Choc Pro, 6 layers. Generated from `config/corne_choc_pro.keymap`.
 
 Thumbs: **Esc**→FUNC · **Tab**→GREEK · **Space** — **Bspc**→SYMBOL · **Enter**→NAV · **Del**→ACCENT
 
-`A`/`I`/`E`/`U` (left) and `T`/`S`/`R`/`N` (right) are home-row mods, mirrored on both hands (Gui/Alt/Ctrl/Shift from pinky to index): hold for the modifier shown, tap for the letter. The Gui and Alt ones (`A`/`I`/`R`/`N`, and the same keys on the other layers) only ever act combined with another key: held alone and released, they do nothing, and the OS never sees a lone Super/Alt (no overview or menu bar by accident). For a bare Alt or Super, use the combos above. All home-row mods are plain letters when pressed within 150 ms of another key, so fast typing never triggers a modifier; pause briefly before starting a shortcut mid-word. Mods work across hands only, so for `⌥ A`/`⌥ O` (æ/œ) hold the right-hand Alt (`R`).
+`A`/`I`/`E`/`U` (left) and `T`/`S`/`R`/`N` (right) are home-row mods, mirrored on both hands (Gui/Alt/Ctrl/Shift from pinky to index): hold for the modifier shown, tap for the letter. The Gui and Alt ones (`A`/`I`/`R`/`N`, and the same keys on the other layers) only ever act combined with another key: held alone and released, they do nothing, and the OS never sees a lone Super/Alt (no overview or menu bar by accident). For a bare Alt or Super, use the combos above. The Gui/Alt/Ctrl home-row mods are plain letters when pressed within 150 ms of another key, so fast typing never triggers them; pause briefly before starting a shortcut mid-word. Shift (`U`/`T`) is exempt, so a capital works right after Space or Backspace. Mods work across hands only, so for `⌥ A`/`⌥ O` (æ/œ) hold the right-hand Alt (`R`).
 
 ---
 

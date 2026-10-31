@@ -68,6 +68,10 @@ ZMK_BEHAVIOR(uc_mm, macro_two_param,
 // Home-row mods pressed less than this many ms after another key resolve as a tap
 // straight away, with no hold decision: no accidental mods while typing fast. A
 // shortcut started mid-word needs a short pause first.
+// Not the Shift ones (hmls/hmrs, hm_star, hm_upsilon/hm_tau, acc_hm_u): a capital is
+// typed mid-flow, right after Space or Backspace (a layer-tap, whose tap is only sent
+// on release, so even later), and the pause turned Shift+letter into "u" + letter.
+// Balanced flavor + opposite-hand hold-trigger-key-positions guard them instead.
 #define HRM_PRIOR_IDLE 150
 ZMK_BEHAVIOR(mmod, macro_one_param,
     wait-ms = <0>;
@@ -432,7 +436,6 @@ ZMK_BEHAVIOR(hm_upsilon, hold_tap,
     bindings = <&kp>, <&uc_upsilon>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
-    require-prior-idle-ms = <HRM_PRIOR_IDLE>;
 )
 
 ZMK_BEHAVIOR(hm_tau, hold_tap,
@@ -442,7 +445,6 @@ ZMK_BEHAVIOR(hm_tau, hold_tap,
     bindings = <&kp>, <&uc_tau>;
     hold-trigger-key-positions = <0 1 2 3 4 5 14 15 16 17 18 19 28 29 30 31 32 33 40 41 42>;
     hold-trigger-on-release;
-    require-prior-idle-ms = <HRM_PRIOR_IDLE>;
 )
 
 // Alt home-row mods for the greek layer, mirroring hml/hmr's I/R placement on the
@@ -480,7 +482,6 @@ ZMK_BEHAVIOR(acc_hm_u, hold_tap,
     bindings = <&kp>, <&u_hat>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
-    require-prior-idle-ms = <HRM_PRIOR_IDLE>;
 )
 
 ZMK_BEHAVIOR(acc_hm_i, hold_tap,
@@ -550,7 +551,6 @@ ZMK_BEHAVIOR(hm_star, hold_tap,
     bindings = <&kp>, <&STAR_OPT>;
     hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
     hold-trigger-on-release;
-    require-prior-idle-ms = <HRM_PRIOR_IDLE>;
 )
 
 // Gui home-row mod for 0 on the symbol layer, same as hmrm but tapping through
@@ -586,6 +586,25 @@ ZMK_BEHAVIOR(hmrm, hold_tap,
     hold-trigger-key-positions = <0 1 2 3 4 5 14 15 16 17 18 19 28 29 30 31 32 33 40 41 42>;
     hold-trigger-on-release;
     require-prior-idle-ms = <HRM_PRIOR_IDLE>;
+)
+
+// Shift home-row mods: hml/hmr without require-prior-idle-ms (see HRM_PRIOR_IDLE).
+ZMK_BEHAVIOR(hmls, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <140>;
+    quick-tap-ms = <100>;
+    bindings = <&kp>, <&kp>;
+    hold-trigger-key-positions = <8 9 10 11 12 13 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
+    hold-trigger-on-release;
+)
+
+ZMK_BEHAVIOR(hmrs, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <140>;
+    quick-tap-ms = <100>;
+    bindings = <&kp>, <&kp>;
+    hold-trigger-key-positions = <0 1 2 3 4 5 14 15 16 17 18 19 28 29 30 31 32 33 40 41 42>;
+    hold-trigger-on-release;
 )
 
 // Hold both home-row shift mods (U left / T right) together to toggle caps word.
@@ -637,7 +656,7 @@ ZMK_BEHAVIOR(hmrm, hold_tap,
 
             bindings = <
             &uc UC_FR_U_GRAVE &uc UC_FR_A_GRAVE &kp J       &o_oe             &uc UC_FR_E_ACUTE &kp B      &none &none &kp F           &kp D              &kp L          &QUOT_OPT   &kp Q            &kp X
-            &SLSH_OPT         &hm_a LGUI 0      &hmlm LALT I &hml LCTRL E      &hml LSHFT U      &COMMA_OPT &none &none &kp P           &hmr RSHFT T       &hmr RCTRL S   &hmrm LALT R &hmrm RGUI N       &QMARK_OPT
+            &SLSH_OPT         &hm_a LGUI 0      &hmlm LALT I &hml LCTRL E      &hmls LSHFT U      &COMMA_OPT &none &none &kp P           &hmrs RSHFT T       &hmr RCTRL S   &hmrm LALT R &hmrm RGUI N       &QMARK_OPT
             &DASH_OPT         &kp K             &kp Y       &uc UC_FR_E_GRAVE &DOT_OPT          &kp W                  &kp G           &c_ced             &kp M          &kp H       &kp V            &kp Z
                                                             &lt FUNCTION ESC  &lt GREEK TAB     &kp SPACE              &lt SYMBOL BSPC &lt NAVIGATION RET &lt ACCENT DEL
             >;
@@ -657,7 +676,7 @@ ZMK_BEHAVIOR(hmrm, hold_tap,
 
             bindings = <
             &none     &kp PRCNT          &kp AMPS  &DLLR_OPT  &kp CARET &kp LBKT  &none &none &kp RBKT &kp N7        &kp N8        &kp N9       &kp HASH &none
-            &SLSH_OPT &hm_sqrt LGUI 0 &hm_plus LALT 0 &hm_equal LCTRL 0 &hm_star LSHFT 0 &kp LPAR  &none &none &kp RPAR &hmr RSHFT N4 &hmr RCTRL N5 &hmrm LALT N6 &hm_zero RGUI 0 &none
+            &SLSH_OPT &hm_sqrt LGUI 0 &hm_plus LALT 0 &hm_equal LCTRL 0 &hm_star LSHFT 0 &kp LPAR  &none &none &kp RPAR &hmrs RSHFT N4 &hmr RCTRL N5 &hmrm LALT N6 &hm_zero RGUI 0 &none
             &none     &kp AT             &LT_OPT   &DASH_OPT  &GT_OPT   &kp LBRC              &kp RBRC &kp N1        &kp N2        &kp N3       &kp DOT  &kp COMMA
                                                    &kp ESC    &kp TAB   &kp SPACE             &none    &kp RET       &kp DEL
             >;
@@ -703,7 +722,7 @@ ZMK_BEHAVIOR(hmrm, hold_tap,
 
             bindings = <
             &none &none    &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &kp LC(V) &none &none &none    &kp PG_DN &kp UP   &kp PG_UP &none   &none
-            &none &kp LGUI &hmlm LALT INT_MUHENKAN &hml LCTRL INT_KATAKANAHIRAGANA &hml LSHFT INT_HENKAN &kp LC(X) &none &none &kp HOME &kp LEFT  &kp DOWN &kp RIGHT &kp END &none
+            &none &kp LGUI &hmlm LALT INT_MUHENKAN &hml LCTRL INT_KATAKANAHIRAGANA &hmls LSHFT INT_HENKAN &kp LC(X) &none &none &kp HOME &kp LEFT  &kp DOWN &kp RIGHT &kp END &none
             &none &none    &kp C_PREV   &kp C_PP   &kp C_NEXT   &kp LC(C)             &none    &kp LC(Z) &none    &kp LC(Y) &none   &none
                                         &kp ESC    &kp TAB      &kp SPACE             &kp BSPC &none     &kp DEL
             >;
